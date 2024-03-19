@@ -6,7 +6,8 @@
 Welcome to the Eco-Reward System, Qatar's innovative waste management solution! Our goal is to make waste collection efficient and rewarding for both residents and our dedicated collectors. 
 Through this initiative, we're introducing a seamless way for collectors to gather users' waste while incentivizing eco-friendly behavior.
 
-Group Members
+**Group Members**
+
 Hamdan Mahroof - 60100159	  
 GitHub: Hamdan-Maharoof
 
