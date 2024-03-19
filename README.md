@@ -1,9 +1,6 @@
-# Project-group4_infs3203
+## Project Title: EcoRewards 
 
-
-# Project Title: EcoRewards 
-
-# Introduction:
+**Introduction**
 
 **Eco-Reward System**
 Welcome to the Eco-Reward System, Qatar's innovative waste management solution! Our goal is to make waste collection efficient and rewarding for both residents and our dedicated collectors. 
