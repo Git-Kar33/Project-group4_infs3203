@@ -11,13 +11,13 @@ Through this initiative, we're introducing a seamless way for collectors to gath
 Hamdan Mahroof - 60100159	  
 GitHub: Hamdan-Maharoof
 
-Mazin Thajudeen - 60102524 
+Mazin Thajudeen - 60102524 <br> 
 GitHub: mazinthaj
 
-Ekram Karim - 60084212
+Ekram Karim - 60084212 <br>
 GitHub: Git-Kar33
 
-MohamedEl Sabonabi - 60096908 
+MohamedEl Sabonabi - 60096908 <br> 
 GitHub: MohamedElsabonabi
 
 **How It Works**
