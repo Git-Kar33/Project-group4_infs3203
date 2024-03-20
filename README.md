@@ -41,3 +41,8 @@ Sustainable motive: By rewarding users with points for their waste, we encourage
 
 Community Engagement: Through our rewards system, we aim to foster a sense of community involvement and responsibility towards waste management.
 
+**Acknowledgement**
+
+Figma Prototype - https://www.figma.com/file/0AuzNTD8F7qaRCmzL6bIcK/Untitled?type=design&node-id=0%3A1&mode=design&t=y5UepVJN5j00hmQT-1
+
+Powerpoint Presentation - https://drive.google.com/drive/u/1/my-drive
