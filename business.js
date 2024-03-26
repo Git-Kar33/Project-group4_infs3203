@@ -47,3 +47,47 @@ async function validID(qid){
 async function addRecord(date, qid, wasteType, category, weight, pointsRecieved){
     await persistence.addRecord(date, qid, wasteType, category, weight, pointsRecieved)
 }
+
+//Points should have a collection of its own. 
+async function getPoints(category){
+    if (category == "Paper"){
+        return 1
+    }
+    else if (category == "Plastic"){
+        return 2
+    }
+    else if (category == "Glass"){
+        return 3
+    }
+    else if (category == "Metal"){
+        return 3
+    }
+    else if (category == "Textile"){
+        return 2
+    }
+    else if (category == "Yard Waste"){
+        return 1
+    }
+}
+
+async function startSession(data) {
+    let sessionId = crypto.randomUUID();
+    let sessionData = {
+        sessionKey:sessionId,
+        expiry: new Date(Date.now() + 1000*60*60),
+        data:data
+    }
+    await persistence.saveSession(sessionData.sessionKey,sessionData.expiry,sessionData.data)
+    return sessionData;
+}
+
+async function getSessionData(key) {
+    return await persistence.getSessionData(key);
+}
+
+async function deleteSession(key){
+  return await persistence.deleteSession(key);
+}
+module.exports={
+    insertUser, insertCustomer, getCustomerDetails, validID, checkLogin, addRecord, getPoints, startSession, getSessionData, deleteSession
+}
