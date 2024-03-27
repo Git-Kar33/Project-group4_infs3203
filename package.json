@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "cookie": "^0.6.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.3",
+    "express-fileupload": "^1.5.0",
+    "express-handlebars": "^7.1.2",
+    "file-upload": "^0.0.0",
+    "fileupload": "^0.2.1",
+    "mongodb": "^6.5.0",
+    "node": "^21.7.1"
+  }
+}

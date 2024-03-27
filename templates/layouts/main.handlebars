@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+
+    <link href="../static/css/style.css" rel="stylesheet">
+    <style>
+        .my-col{
+          display: flex;
+          justify-content: center;
+          height: 100%; 
+        }
+        .background{
+            background-color: #DAF4FF;
+            padding-bottom: 10%;
+        }
+        .image-container {
+          text-align: center;
+        }
+        .image-text{
+            padding-bottom: 1%;
+        }
+        img{
+            min-width: 100px;
+            width: 10%;
+            display: inline-block;
+            padding-bottom: 0.5%;
+        }
+        .logo-image{
+          margin-top: 10%;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="background min-vh-100 d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="image-container logo-image">
+                <img src="../static/logo.png">
+            </div>
+            <div class="image-container image-text">
+                <img src="../static/ECOREWARDS.png">
+            </div>
+        <div class="row justify-content-center">
+              {{{body}}}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
