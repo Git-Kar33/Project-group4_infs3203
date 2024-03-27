@@ -50,3 +50,60 @@ app.post('/login-form', async (req, res) => {
     }
     res.redirect("/login?message=Invalid Credentials"); // Redirect to login page with error message
 });
+
+// Route for searching records
+app.get("/search-record", async (req, res) => {
+    let sessionId = req.cookies.projectkey; // Get session key from cookie
+    let sessionData = await business.getSessionData(sessionId); // Get session data from database
+    if (!sessionData) { // If session data does not exist
+        let sessionData = await business.startSession({ username: "" }); // Start new session
+        res.cookie('projectkey', sessionData.sessionKey, sessionData.expiry); // Set session key cookie
+        res.redirect("/login?message=Please Login"); // Redirect to login page with message
+        return;
+    }
+    let message = req.query.message; // Extract message from query parameter
+    res.render('searchRecord', { layout: "main", message: message }); // Render search record view with optional message
+});
+
+// Route for displaying customer information
+app.get("/info", async (req, res) => {
+    let sessionId = req.cookies.projectkey; // Get session key from cookie
+    let sessionData = await business.getSessionData(sessionId); // Get session data from database
+    if (!sessionData) { // If session data does not exist
+        let sessionData = await business.startSession({ username: "" }); // Start new session
+        res.cookie('projectkey', sessionData.sessionKey, sessionData.expiry); // Set session key cookie
+        res.redirect("/login?message=Please Login"); // Redirect to login page with message
+        return;
+    }
+    let qid = req.query.qid; // Extract Qatari ID from query parameter
+    if (!(await business.validID(qid))) { // Check if Qatari ID is valid
+        res.redirect("/search-record?message=Please enter a valid Qatari id"); // Redirect to search record page with error message
+        return;
+    }
+    let customerInfo = await business.getCustomerDetails(qid); // Get customer details from database
+    res.render('customerData', { layout: "main", customerInfo: customerInfo }); // Render customer data view
+});
+
+// Route for adding a record
+app.post("/addRecord", async (req, res) => {
+    let currentDate = new Date(); // Get current date
+    let qid = req.body.qid; // Extract Qatari ID from form data
+    let wasteType = req.body.wasteType; // Extract waste type from form data
+    let category = req.body.category; // Extract category from form data
+    let weight = Number(req.body.weight); // Extract weight from form data and convert to number
+    let points = await business.getPoints(category); // Get points based on category
+    await business.addRecord(currentDate.toLocaleDateString(), qid, wasteType, category, weight, points * weight); // Add record to database
+    res.redirect(`/info?qid=${qid}`); // Redirect to customer information page
+});
+
+// Custom 404 handler
+function function404(req, res) {
+    res.status(404).render("error404", { layout: undefined }); // Render 404 error page
+}
+
+// Apply 404 handler
+app.use(function404);
+
+// Start server
+app.listen(5000, () => { console.log("Running") }); // Listen on port 5000 and log a message
+
