@@ -49,4 +49,56 @@ async function validID(qid){
     return false;
 }
 
+// Function to add waste disposal record
+async function addRecord(date, qid, wasteType, category, weight, pointsReceived){
+    await persistence.addRecord(date, qid, wasteType, category, weight, pointsReceived)
+}
 
+// Function to get points associated with waste category
+async function getPoints(category){
+    if (category == "Paper"){
+        return 1
+    }
+    else if (category == "Plastic"){
+        return 2
+    }
+    else if (category == "Glass"){
+        return 3
+    }
+    else if (category == "Metal"){
+        return 3
+    }
+    else if (category == "Textile"){
+        return 2
+    }
+    else if (category == "Yard Waste"){
+        return 1
+    }
+}
+
+// Function to start a new session
+async function startSession(data) {
+    let sessionId = crypto.randomUUID();
+    let sessionData = {
+        sessionKey:sessionId,
+        expiry: new Date(Date.now() + 1000*60*60),
+        data:data
+    }
+    await persistence.saveSession(sessionData.sessionKey,sessionData.expiry,sessionData.data)
+    return sessionData;
+}
+
+// Function to retrieve session data
+async function getSessionData(key) {
+    return await persistence.getSessionData(key);
+}
+
+// Function to delete session data
+async function deleteSession(key){
+  return await persistence.deleteSession(key);
+}
+
+// Exporting all functions as part of the module
+module.exports={
+    insertUser, insertCustomer, getCustomerDetails, validID, checkLogin, addRecord, getPoints, startSession, getSessionData, deleteSession
+}
