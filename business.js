@@ -1,6 +1,5 @@
-// Import necessary modules
-const persistence = require("./persistence.js") // Module for data persistence
-const crypto = require("crypto") // Module for cryptographic operations
+const persistence = require("./persistence.js") 
+const crypto = require("crypto") 
 
 // Function to insert user data
 async function insertUser(data){
@@ -12,9 +11,8 @@ async function insertCustomer(data){
     await persistence.insertCustomer(data)
 }
 
-// Function to retrieve customer details based on query identifier
+// Function to retrieve customer details
 async function getCustomerDetails(qid){
-    // Check if customer data exists, if not, insert default data
     let customerData = await persistence.getCustomerDetails(qid)
     if(!customerData){
         await persistence.insertCustomer({qid: qid, points: 0, dateRecord: []})
@@ -98,7 +96,6 @@ async function deleteSession(key){
   return await persistence.deleteSession(key);
 }
 
-// Exporting all functions as part of the module
 module.exports={
     insertUser, insertCustomer, getCustomerDetails, validID, checkLogin, addRecord, getPoints, startSession, getSessionData, deleteSession
 }
