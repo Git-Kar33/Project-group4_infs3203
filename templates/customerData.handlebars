@@ -1,0 +1,135 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap">
+    <style>
+        .search{
+            justify-content: center;
+            align-items: center;
+        }
+        .card1 {
+            width: 50rem;
+            background: #C6DDE7;
+            box-shadow: -17px 15px 4px 0px rgba(0, 0, 0, 0.13);
+            padding: 1em 2em 1em 2em;
+        }
+        .inner-box{
+            border-radius: 0.275rem;
+            padding: 2rem 1rem 2rem 1rem;
+            background: #7FB2C8;
+        }
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+        .outer.active{
+            background: #7FB2C8;
+        }
+        .user-submit{
+            display: block;
+            margin: 0 auto;
+            width: 30%;
+            border: none;
+            padding: 7px 0 7px 0;
+            border-radius: 8px;
+            background: linear-gradient(0deg, #00CEA8 -114.15%, #3C2E6B 167.92%);
+            box-shadow: -6px 4px 4px 0px rgba(0, 0, 0, 0.47);
+            color: #EFEFEF;
+            text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.25);
+            font-family: 'Archivo Black';
+            font-size: 1em;
+            font-style: normal;
+            line-height: normal;
+        }
+        .alert-row{
+            margin-left: 25%;
+            width: 50%;
+        }
+    </style>
+</head>
+<div class="row search">
+    <div class="card card1">
+        <div class="tab-pane p-3 active preview" style="padding-bottom: 0px" role="tabpanel" id="preview-1006">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                     <a class="nav-link outer active" aria-current="page" data-content="recent-activity">Recent Activity</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link outer" href="#" data-content="add-new-record">Add New Record</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link outer" href="#" data-content="link">Link</a>
+                </li>
+            </ul>
+        </div>
+        <div class="inner-box">
+            <div id="recent-activity" class="content active">
+                <p>This is the content for Recent Activity.</p>
+            </div>
+            <div id="add-new-record" class="content">
+                <div class="row alert-row" style="display: none;" id="alert">
+                    <div class="alert alert-danger" role="alert" >Please enter valid info</div>
+                </div>
+                <form class="row g-3" method="post" action="addRecord" onsubmit="return validateForm()">
+                    <input type="text" hidden value="{{customerInfo.qid}}" id="qid" name="qid">
+                    <div class="col">
+                        <input class="form-control" id="wasteType" type="text" name="wasteType" placeholder="Waste Type/ Waste Name">
+                    </div>
+                    <div class="col">
+                        <select class="form-select" name="category" id="category">
+                            <option selected value="Plastic">Plastic</option>
+                            <option value="Paper">Paper</option>
+                            <option value="Glass">Glass</option>
+                            <option value="Metal">Steel/Aluminum</option>
+                            <option value="Textile">Textile</option>
+                            <option value="Yard Waste">Yard Waste</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="weight" type="number" step="any" name="weight" placeholder="Weight in Grams">
+                    </div>
+                    <div class="row g-3">
+                        <input class="user-submit" type="submit" value="Add Record">
+                    </div>
+                </form>
+            </div>
+            <div id="link" class="content">
+                <p>This is the content for Link.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const tabLinks = document.querySelectorAll('.nav-link');
+    const contentAreas = document.querySelectorAll('.content');
+
+    tabLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        tabLinks.forEach(link => link.classList.remove('active'));
+        contentAreas.forEach(content => content.classList.remove('active'));
+
+        this.classList.add('active');
+        const contentId = this.dataset.content;
+        document.getElementById(contentId).classList.add('active');
+    });
+    });
+
+function validateForm() {
+    const wasteNameInput = document.getElementById('wasteName');
+    const weightInput = document.getElementById('weight');
+
+    if (wasteNameInput.value.trim() === "" || isNaN(weightInput.value) || weightInput.value.trim() === "") {
+        let message = document.getElementById("alert")
+        message.style.display = "block"
+        return false;
+    }
+    let message = document.getElementById("alert")
+    message.style.display = "none"
+    return true;
+}
+</script>
+
