@@ -1,45 +1,32 @@
-# Project Configuration
-project:
-  name: Waste Management System
-  description: A system for managing waste records and customer data.
+name: Node.js CI
 
-# Dependencies
-dependencies:
-  node:
-    version: 14.17.0
-  npm:
-    version: 6.14.13
-  packages:
-    express: "^4.17.1"
-    body-parser: "^1.19.0"
-    cookie-parser: "^1.4.5"
-    mongodb: "^4.3.0"
-    crypto: "^1.0.1"
-    express-handlebars: "^5.3.2"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-# File Structure
-file_structure:
-  root:
-    - presentation.js
-    - business.js
-    - persistence.js
-    - templates:
-        - homepage.handlebars
-        - login.handlebars
-        - searchRecord.handlebars
-        - customerData.handlebars
-        - error404.handlebars
-    - static:
-        - css:
-            - styles.css
-        - images:
-            - logo.png
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# Scripts
-scripts:
-  start: node presentation.js
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-# Development Environment
-dev_environment:
-  editor: Visual Studio Code
-  git_repo: https://github.com/yourusername/waste-management-system.git
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Check code coverage
+        run: npm run coverage
+
