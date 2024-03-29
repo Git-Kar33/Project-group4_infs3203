@@ -1,33 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const assert = require('assert');
 const business = require('./business.js');
 
-let app = express();
+describe('Business Functions', () => {
+    it('should insert a user', async () => {
+        // Write your test logic here
+        // Example:
+        await business.insertUser({ username: 'testuser', password: 'testpassword' });
+        let userDetails = await business.getUserDetails('testuser');
+        assert.strictEqual(userDetails.username, 'testuser');
+        assert.strictEqual(userDetails.password, 'testpassword');
+    });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(cookieParser());
-
-app.get("/", async (req, res) => {
-    res.send("Welcome to the Waste Management System");
+    // Add more test cases for other functions as needed
 });
-
-app.post('/login-form', async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    const isValidLogin = await business.checkLogin(username, password);
-    if (isValidLogin) {
-        res.send("Login successful");
-    } else {
-        res.send("Invalid credentials");
-    }
-});
-
-app.get("/info", async (req, res) => {
-    const qid = req.query.qid;
-    const customerInfo = await business.getCustomerDetails(qid);
-    res.json(customerInfo);
-});
-
-module.exports = app;
