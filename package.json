@@ -1,4 +1,12 @@
 {
+  "name": "Eco-Reward System",
+  "version": "1.0.0",
+  "description": "Waste Manangement",
+  "main": "presentation.js", 
+  "scripts": {
+    "start": "node presentation.js",
+    "test": "jest" 
+  },
   "dependencies": {
     "cookie": "^0.6.0",
     "cookie-parser": "^1.4.6",
@@ -9,5 +17,9 @@
     "fileupload": "^0.2.1",
     "mongodb": "^6.5.0",
     "node": "^21.7.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
   }
 }
