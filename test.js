@@ -1,15 +1,11 @@
-const assert = require('assert');
-const business = require('./business.js');
+const request = require('supertest');
+const app = require('./presentation'); // Assuming your main file is named 'presentation.js'
 
-describe('Business Functions', () => {
-    it('should insert a user', async () => {
-        // Write your test logic here
-        // Example:
-        await business.insertUser({ username: 'testuser', password: 'testpassword' });
-        let userDetails = await business.getUserDetails('testuser');
-        assert.strictEqual(userDetails.username, 'testuser');
-        assert.strictEqual(userDetails.password, 'testpassword');
+describe('Test Express routes', () => {
+    it('GET / responds with 200', async () => {
+        const response = await request(app).get('/');
+        expect(response.statusCode).toBe(200);
     });
 
-    // Add more test cases for other functions as needed
+    // Add more test cases for other routes as needed
 });
