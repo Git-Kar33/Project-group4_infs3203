@@ -99,6 +99,7 @@ app.post("/addRecord", async (req, res) => {
 });
 
 app.use(function404);
+module.exports = app;
 
 // Start server
 app.listen(5000, () => { console.log("Running") });
