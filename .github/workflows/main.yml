@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: '21.7.1'
 
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install test js
+        run: npm install --save-dev jest
+
 
       - name: Run Tests
         run: npm test
