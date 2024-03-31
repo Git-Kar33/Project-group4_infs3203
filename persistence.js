@@ -10,7 +10,7 @@ let customerData = undefined;
 
 // Function to connect to MongoDB database
 async function connectDatabase() {
-    if (!client) {
+    if (!client || !client.isConnected()) {
         client = new mongodb.MongoClient("mongodb+srv://60084212:12class34@cluster0.homew0b.mongodb.net/");
         db = client.db('INFS3203');
         user = db.collection('user');
