@@ -1,4 +1,4 @@
-name: Node.js Test
+name: Eco_sample3_test
 
 on:
   pull_request:
