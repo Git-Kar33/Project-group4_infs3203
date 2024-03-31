@@ -1,21 +1,18 @@
-const persistence = require("./persistence.js") 
-const crypto = require("crypto") 
+const persistence = require("./persistence.js")
+const crypto = require("crypto")
 
-// Function to insert user data
 async function insertUser(data){
     await persistence.insertUser(data)
 }
 
-// Function to insert customer data
 async function insertCustomer(data){
     await persistence.insertCustomer(data)
 }
 
-// Function to retrieve customer details
 async function getCustomerDetails(qid){
     let customerData = await persistence.getCustomerDetails(qid)
     if(!customerData){
-        await persistence.insertCustomer({qid: qid, points: 0, dateRecord: []})
+        await persistence.insertCustomer({qid: qid, totalPoints: 0, dateRecord: []})
         return await persistence.getCustomerDetails(qid)
     }
     else{
@@ -23,13 +20,15 @@ async function getCustomerDetails(qid){
     }
 }
 
-// Function to check login credentials
 async function checkLogin(username, password) {
     let userDetails = await persistence.getUserDetails(username);
+    var hash = crypto.createHash('sha256')
+    hash.update(password)
+    let result = hash.digest('hex')
     if(!userDetails){
       return false
     }
-    if (userDetails.password == password){
+    if (userDetails.password == result){
         return true;
     }
     return false
@@ -47,13 +46,19 @@ async function validID(qid){
     return false;
 }
 
-// Function to add waste disposal record
-async function addRecord(date, qid, wasteType, category, weight, pointsReceived){
-    await persistence.addRecord(date, qid, wasteType, category, weight, pointsReceived)
+async function addRecord(date, qid, wasteType, category, weight, pointsRecieved){
+    await persistence.addRecord(date, qid, wasteType, category, weight, pointsRecieved)
 }
 
-// Function to get points associated with waste category
-//Note: Points should have a collection of its own. 
+async function insertPointData(qid, date, balancePoint, type, point){
+    await persistence.insertPointData({qid: qid, date: date, balance: balancePoint, type: type, point: point})
+}
+
+async function getPointHistory(qid) {
+    return await persistence.getPointHistory(qid)
+}
+
+//Points should have a collection of its own as new categories can be introduced. But for this project, we will be using this function to get points.
 async function getPoints(category){
     if (category == "Paper"){
         return 1
@@ -75,7 +80,10 @@ async function getPoints(category){
     }
 }
 
-// Function to start a new session
+async function updatePoints(qid, points){
+    await persistence.updatePoints(qid, points)
+}
+
 async function startSession(data) {
     let sessionId = crypto.randomUUID();
     let sessionData = {
@@ -87,16 +95,15 @@ async function startSession(data) {
     return sessionData;
 }
 
-// Function to retrieve session data
 async function getSessionData(key) {
     return await persistence.getSessionData(key);
 }
 
-// Function to delete session data
 async function deleteSession(key){
   return await persistence.deleteSession(key);
 }
 
 module.exports={
-    insertUser, insertCustomer, getCustomerDetails, validID, checkLogin, addRecord, getPoints, startSession, getSessionData, deleteSession
+    insertUser, insertCustomer, getCustomerDetails, validID, insertPointData, getPointHistory, checkLogin, addRecord, getPoints, updatePoints, startSession, getSessionData, deleteSession,
+
 }
