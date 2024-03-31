@@ -1,7 +1,7 @@
 name: Eco_sample3_test
 
 on:
-  pull_request:
+  push:
     branches:
       - testing
 
@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '21.7.1'
+
+      - name: Install Dependencies
+        run: npm install
 
       - name: Run Tests
         run: npm test
