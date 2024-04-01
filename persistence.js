@@ -87,3 +87,4 @@ async function deleteSession(key){
 module.exports={
     insertUser, insertCustomer, getUserDetails, addRecord, getCustomerDetails, updatePoints, saveSession, getSessionData, deleteSession
 }
+module.exports = app;
