@@ -1,6 +1,7 @@
 const business = require('./business.js');
+const request = require('supertest');
+const { app, server } = require('./presentation');
 
-describe('Business Functions', () => {
   // Test case for insertUser
   it('Inserting User to database', async () => {
     const userData = { username: 'testuser', password: 'testpassword' };
@@ -31,7 +32,7 @@ describe('Business Functions', () => {
     await expect(business.addRecord(currentDate, qid, wasteType, category, weight, pointsReceived)).resolves.not.toThrow();
   });
 
-   // Test case for getPoints
+  // Test case for getPoints
   it('getPoints should retrieve points for a given category', async () => {
     expect(await business.getPoints('Paper')).toBe(1);
     expect(await business.getPoints('Plastic')).toBe(2);
@@ -51,7 +52,8 @@ describe('Business Functions', () => {
     await expect(business.startSession(sessionData)).resolves.not.toThrow();
   });
 
-    it('deleteSession should delete a session from the database', async () => {
+  // Test case for deleteSession
+  it('deleteSession should delete a session from the database', async () => {
     const key = 'abc123';
     await expect(business.deleteSession(key)).resolves.not.toThrow();
   });
@@ -67,4 +69,11 @@ describe('Business Functions', () => {
     const qid = '12345678901';
     await expect(business.getPointHistory(qid)).resolves.toBeDefined();
   });
-});
+
+  // Close the Express server after all tests have been performed
+  afterAll(done => {
+    server.close(() => {
+      console.log('Server closed');
+      done();
+    });
+  });
