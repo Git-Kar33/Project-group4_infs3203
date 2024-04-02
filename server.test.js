@@ -70,10 +70,4 @@ const { app, server } = require('./presentation');
     await expect(business.getPointHistory(qid)).resolves.toBeDefined();
   });
 
-  // Close the Express server after all tests have been performed
-  afterAll(done => {
-    server.close(() => {
-      console.log('Server closed');
-      done();
-    });
-  });
+
