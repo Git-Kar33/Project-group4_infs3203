@@ -1,11 +1,11 @@
 {
   "name": "eco-reward-system",
   "version": "1.0.0",
-  "description": "Waste Manangement",
-  "main": "presentation.js", 
+  "description": "Your project description",
+  "main": "presentation.js",
   "scripts": {
     "start": "node presentation.js",
-    "test": "jest" 
+    "test": "jest --runInBand --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "cookie": "^0.6.0",
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "mongodb-memory-server": "^9.1.8",
     "supertest": "^6.3.4"
   }
 }
