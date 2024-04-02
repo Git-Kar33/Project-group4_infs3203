@@ -5,6 +5,7 @@ let db = undefined
 let user = undefined
 let session = undefined
 let customerData = undefined
+let pointHistory = undefined
 
 
 async function connectDatabase() {
@@ -14,6 +15,7 @@ async function connectDatabase() {
         user = db.collection('user')
         customerData = db.collection('customerData')
         session = db.collection('SessionData')
+        pointHistory = db.collection('pointsData')
         await client.connect()
     }
 }
@@ -28,11 +30,23 @@ async function insertCustomer(data){
     await customerData.insertOne(data)
 }
 
+async function insertPointData(data){
+    await connectDatabase();
+    await pointHistory.insertOne(data)
+}
+
 async function getUserDetails(userName) {
     await connectDatabase();
     let users = await user.find({username:userName});
     let userDetails = await users.toArray();
     return userDetails[0];
+}
+
+async function getPointHistory(qid) {
+    await connectDatabase();
+    let userPointHistory = await pointHistory.find({qid:qid}).sort({date: -1});
+    let userPointHistoryData = await userPointHistory.toArray();
+    return userPointHistoryData;
 }
 
 async function getCustomerDetails(qid) {
@@ -84,7 +98,8 @@ async function deleteSession(key){
     await session.deleteOne({sessionKey:key});
 }
 
+
+
 module.exports={
-    insertUser, insertCustomer, getUserDetails, addRecord, getCustomerDetails, updatePoints, saveSession, getSessionData, deleteSession
+    insertUser, insertCustomer, insertPointData, getUserDetails, getPointHistory, addRecord, getCustomerDetails, updatePoints, saveSession, getSessionData, deleteSession
 }
-module.exports = app;
