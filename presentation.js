@@ -1,17 +1,16 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const business = require('./business.js')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const business = require('./business.js');
 
-let app = express()
-const handlebars = require('express-handlebars')
-app.set('views', __dirname+"/templates")
-app.set('view engine', 'handlebars')
-app.engine('handlebars', handlebars.engine())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
-app.use(cookieParser())
-app.use("/static",express.static(__dirname+"/static"));
+const app = express();
+const handlebars = require('express-handlebars');
+app.set('views', __dirname + "/templates");
+app.set('view engine', 'handlebars');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
+app.use("/static", express.static(__dirname + "/static"));
 
 function function404(req, res) {
     res.status(404).render("error404", {layout:undefined})
@@ -134,5 +133,8 @@ app.patch(`/api/:qid/info`, async(req,res)=>{
     res.send("ok")
 })
 
-app.use(function404)
-app.listen(5000, () => { console.log("Running")})
+// const server = app.listen(5000, () => {
+//     console.log("Server running on port 5000");
+//   });
+  
+  module.exports = app;
