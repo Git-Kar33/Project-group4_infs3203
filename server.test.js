@@ -51,3 +51,20 @@ describe('Business Functions', () => {
     await expect(business.startSession(sessionData)).resolves.not.toThrow();
   });
 
+    it('deleteSession should delete a session from the database', async () => {
+    const key = 'abc123';
+    await expect(business.deleteSession(key)).resolves.not.toThrow();
+  });
+
+  // Test case for insertPointData
+  it('insertPointData should insert point data into the database', async () => {
+    const pointData = { qid: '12345678901', date: new Date(), balance: 100, type: 'Addition', point: 10 };
+    await expect(business.insertPointData(pointData)).resolves.not.toThrow();
+  });
+
+  // Test case for getPointHistory
+  it('getPointHistory should retrieve point history for a customer', async () => {
+    const qid = '12345678901';
+    await expect(business.getPointHistory(qid)).resolves.toBeDefined();
+  });
+});
