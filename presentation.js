@@ -18,12 +18,12 @@ function function404(req, res) {
 }
 
 app.get("/", async(req,res)=>{
-    res.render('homepage',{layout:"main"})
+    res.render('homepage',{layout:"LoginMain"})
 })
 
 app.get("/login", async(req,res)=>{
     let message = req.query.message;
-    res.render('login',{layout:"main", message: message})
+    res.render('login',{layout:"LoginMain", message: message})
 })
 
 app.get("/logout",async(req,res)=>{
@@ -103,15 +103,17 @@ app.get("/info", async(req,res)=>{
 })
 
 app.put("/api/:qid/info", async(req,res)=>{
-    let currentDate = new Date();
+    let currentDate = new Date()
 
     let qid = req.params.qid
     let wasteType = req.body.wasteNameInput
     let category = req.body.category
     let weight = Number(req.body.weightInput)
 
-    let points = await business.getPoints(category);
-    await business.addRecord(currentDate.toLocaleDateString(), qid, wasteType, category, weight, points*weight)
+    let point = await business.getPoints(category);
+    await business.addRecord(currentDate.toLocaleDateString(), qid, wasteType, category, weight, point*weight)
+    let customerData = await business.getCustomerDetails(qid)
+    await business.insertPointData(qid, currentDate, customerData.totalPoints, "add", point*weight)
     res.send("ok")
 })
 
@@ -120,8 +122,15 @@ app.get("/api/:qid/user", async(req,res)=>{
     res.send(customerInfo)
 })
 
+app.get("/api/:qid/user/point", async(req,res)=>{
+    let pointHistory = await business.getPointHistory(req.params.qid)
+    res.send(pointHistory)
+})
+
 app.patch(`/api/:qid/info`, async(req,res)=>{
+    let currentDate = new Date()
     await business.updatePoints(req.params.qid, req.body.points)
+    await business.insertPointData(req.params.qid, currentDate, req.body.points, "redeem", req.body.cash*30)
     res.send("ok")
 })
 
