@@ -22,14 +22,38 @@ async function getCustomerDetails(qid){
 
 async function checkLogin(username, password) {
     let userDetails = await persistence.getUserDetails(username);
+    var hash = crypto.createHash('sha256')
+    hash.update(password)
+    let result = hash.digest('hex')
     if(!userDetails){
       return false
     }
-    if (userDetails.password == password){
+    if (userDetails.password == result){
         return true;
     }
     return false
 }
+
+// try {
+//     let userDetails = await persistence.getUserDetails(username);
+//     if (!userDetails) {
+//         return false;
+//     }
+//     var hash = crypto.createHash('sha256');
+//     hash.update(password);
+//     let result = hash.digest('hex');
+//     if (userDetails.password == result) {
+//         return true;
+//     }
+//     return false;
+// } catch (error) {
+//     console.error('Error in checkLogin:', error);
+//     return false;
+// }
+// }
+
+
+
 
 //it is not 100% accurate as it doesnt check the last 5 numbers. 
 async function validID(qid){
@@ -45,6 +69,14 @@ async function validID(qid){
 
 async function addRecord(date, qid, wasteType, category, weight, pointsRecieved){
     await persistence.addRecord(date, qid, wasteType, category, weight, pointsRecieved)
+}
+
+async function insertPointData(qid, date, balancePoint, type, point){
+    await persistence.insertPointData({qid: qid, date: date, balance: balancePoint, type: type, point: point})
+}
+
+async function getPointHistory(qid) {
+    return await persistence.getPointHistory(qid)
 }
 
 //Points should have a collection of its own as new categories can be introduced. But for this project, we will be using this function to get points.
@@ -93,6 +125,6 @@ async function deleteSession(key){
 }
 
 module.exports={
-    insertUser, insertCustomer, getCustomerDetails, validID, checkLogin, addRecord, getPoints, updatePoints, startSession, getSessionData, deleteSession,
+    insertUser, insertCustomer, getCustomerDetails, validID, insertPointData, getPointHistory, checkLogin, addRecord, getPoints, updatePoints, startSession, getSessionData, deleteSession,
 
 }
