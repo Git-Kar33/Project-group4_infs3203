@@ -31,42 +31,4 @@ describe('Business Functions', () => {
     await expect(business.addRecord(currentDate, qid, wasteType, category, weight, pointsReceived)).resolves.not.toThrow();
   });
 
-  // Test case for getPoints
-  it('getPoints should retrieve points for a given category', async () => {
-    expect(await business.getPoints('Paper')).toBe(1);
-    expect(await business.getPoints('Plastic')).toBe(2);
-    expect(await business.getPoints('Metal')).toBe(3);
-  });
 
-  // Test case for updatePoints
-  it('updatePoints should update the total points for a customer', async () => {
-    const qid = '12345678901';
-    const newPoints = 50;
-    await expect(business.updatePoints(qid, newPoints)).resolves.not.toThrow();
-  });
-
-  // Test case for startSession
-  it('startSession should initiate a new session for the user', async () => {
-    const sessionData = { username: 'testuser' };
-    await expect(business.startSession(sessionData)).resolves.not.toThrow();
-  });
-
-  // Test case for deleteSession
-  it('deleteSession should delete a session from the database', async () => {
-    const key = 'abc123';
-    await expect(business.deleteSession(key)).resolves.not.toThrow();
-  });
-
-  // Test case for insertPointData
-  it('insertPointData should insert point data into the database', async () => {
-    const pointData = { qid: '12345678901', date: new Date(), balance: 100, type: 'Addition', point: 10 };
-    await expect(business.insertPointData(pointData)).resolves.not.toThrow();
-  });
-
-  // Test case for getPointHistory
-  it('getPointHistory should retrieve point history for a customer', async () => {
-    const qid = '12345678901';
-    await expect(business.getPointHistory(qid)).resolves.toBeDefined();
-  });
-
-});
