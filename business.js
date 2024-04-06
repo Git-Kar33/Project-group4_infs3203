@@ -34,27 +34,6 @@ async function checkLogin(username, password) {
     return false
 }
 
-// try {
-//     let userDetails = await persistence.getUserDetails(username);
-//     if (!userDetails) {
-//         return false;
-//     }
-//     var hash = crypto.createHash('sha256');
-//     hash.update(password);
-//     let result = hash.digest('hex');
-//     if (userDetails.password == result) {
-//         return true;
-//     }
-//     return false;
-// } catch (error) {
-//     console.error('Error in checkLogin:', error);
-//     return false;
-// }
-// }
-
-
-
-
 //it is not 100% accurate as it doesnt check the last 5 numbers. 
 async function validID(qid){
     if(qid.length == 11 && !isNaN(qid)){
