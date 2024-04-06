@@ -98,8 +98,6 @@ async function deleteSession(key){
     await session.deleteOne({sessionKey:key});
 }
 
-
-
 module.exports={
     insertUser, insertCustomer, insertPointData, getUserDetails, getPointHistory, addRecord, getCustomerDetails, updatePoints, saveSession, getSessionData, deleteSession
 }
