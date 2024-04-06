@@ -1,4 +1,4 @@
-name: Run Tests and Push to Testing1 Branch
+name: CI / CD Testing
 
 on:
   push:
