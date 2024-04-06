@@ -133,6 +133,6 @@ app.patch(`/api/:qid/info`, async(req,res)=>{
     await business.insertPointData(req.params.qid, currentDate, req.body.points, "redeem", req.body.cash*30)
     res.send("ok")
 })
-
+// Test Test
 // app.use(function404)
 // app.listen(5000, () => { console.log("Running")})
