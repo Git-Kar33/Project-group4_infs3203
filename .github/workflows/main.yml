@@ -26,14 +26,17 @@ jobs:
     - name: Run tests
       run: npm run test
     
-    - name: Push changes to staging 
+    - name: Remove workflows directory
       run: rm -rf .github/workflows
 
-    - name: Remove .github/workflows directory
-      run: rm -rf .github/workflows
+    - name: Add all files except workflows directory
+      run: git add -A && git reset -- .github/workflows
+
+    - name: Commit changes
+      run: git commit -m "Exclude .github/workflows directory from push"
 
     - name: Push changes to staging
-      run: |
-          git add .
-          git commit -m "Exclude .github/workflows directory"
-          git push origin development:staging --force
+      uses: ad-m/github-push-action@master
+      with:
+        branch: staging
+        github_token: ${{ secrets.GITHUB_TOKEN }}
