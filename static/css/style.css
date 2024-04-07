@@ -105,7 +105,7 @@ body {
   line-height: var(--cui-body-line-height);
   color: var(--cui-body-color);
   text-align: var(--cui-body-text-align);
-  background-color: var(--cui-body-bg);
+  background-color: #daf4ff;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 21, 0);
 }
@@ -4848,7 +4848,7 @@ html:not([dir=rtl]) .navbar-nav {
   --cui-card-cap-color: unset;
   --cui-card-height: ;
   --cui-card-color: unset;
-  --cui-card-bg: #fff;
+  --cui-card-bg: #ffffff;
   --cui-card-img-overlay-padding: 1rem;
   --cui-card-group-margin: 0.75rem;
   position: relative;
@@ -4915,7 +4915,7 @@ html:not([dir=rtl]) .card-link + .card-link {
   padding: var(--cui-card-cap-padding-y) var(--cui-card-cap-padding-x);
   margin-bottom: 0;
   color: var(--cui-card-cap-color);
-  background-color: var(--cui-card-cap-bg);
+  background-color: #c6d8e16b;
   border-bottom: var(--cui-card-border-width) solid var(--cui-card-border-color);
 }
 .card-header:first-child {
