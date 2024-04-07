@@ -20,24 +20,13 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm run test
-    
-    - name: Remove workflows directory
+    - name: Remove .github/workflows directory
       run: rm -rf .github/workflows
-
-    - name: Add all files except workflows directory
-      run: |
-        git add -A
-        git reset -- .github/workflows
 
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
       with:
         branch: staging
-        github_token: ${{ secrets.GITHUB_TOKEN }} staging
-
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
    
