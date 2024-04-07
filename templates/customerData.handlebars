@@ -1,0 +1,449 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap">
+    <style>
+        .search{
+            justify-content: center;
+            align-items: center;
+        }
+        .card1 {
+            width: 70rem;
+            background: #C6DDE7;
+            box-shadow: -17px 15px 4px 0px rgba(0, 0, 0, 0.13);
+            padding: 1em 2em 1em 2em;
+        }
+        .inner-box{
+            border-radius: 0.275rem;
+            padding: 2rem 1rem 2rem 1rem;
+            background: #7FB2C8;
+        }
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+        .outer.active{
+            background: #7FB2C8;
+        }
+        .user-submit{
+            display: block;
+            margin: 2% auto 0 auto;
+            width: 30%;
+            border: none;
+            padding: 1% 0 1% 0;
+            border-radius: 8px;
+            background: linear-gradient(0deg, #00CEA8 -114.15%, #3C2E6B 167.92%);
+            box-shadow: -6px 4px 4px 0px rgba(0, 0, 0, 0.47);
+            color: #EFEFEF;
+            text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.25);
+            font-family: 'Archivo Black';
+            font-size: 1em;
+            font-style: normal;
+            line-height: normal;
+            transition: all 0.4s ease-in-out; 
+        }
+        .user-submit:hover{
+            background: linear-gradient(182deg, #3affdb -114.15%, #3C2E6B 167.92%)
+        }
+        .alert-row{
+            margin-left: 25%;
+            width: 50%;
+        }
+        .noRecord{
+            padding: 7% 0px 7% 0px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .points-right {
+            display: block;
+            float: right;
+        }
+        .nav-points{
+            display: block;
+            margin-left: auto;
+            padding: var(--cui-nav-link-padding-y) var(--cui-nav-link-padding-x);
+            color: #595A67;
+            text-decoration: none;
+        }
+        .point-convert{
+            display: block;
+            margin: 5% auto;
+            width: 50%;
+            border: none;
+            padding: 4% 0 4% 0;
+            border-radius: 0.625rem;
+            background: linear-gradient(0deg, #00CEA8 -114.15%, #3C2E6B 167.92%);
+            box-shadow: -6px 4px 4px 0px rgba(0, 0, 0, 0.47);
+            color: #EFEFEF;
+            text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.25);
+            font-family: 'Archivo Black';
+            font-size: 1em;
+            font-style: normal;
+            line-height: normal;
+            transition: all 0.4s ease-in-out; 
+        }
+        .point-convert:hover{
+            background: linear-gradient(182deg, #3affdb -114.15%, #3C2E6B 167.92%);
+        }
+        .new-record, .search{
+            padding: 4% 0px 4% 0px;
+        }
+        .record-found{
+            margin-top: 6%;
+            width: 80%;
+        }
+        .nav-item:hover{
+            background-color: #7fb2c859;
+            border-radius: 0.3em 0.3em 0px 0px;
+        }
+        .nav-item a:hover{
+            color: black;
+        }
+        .add, .redeem {
+            width: 87%; 
+            margin: 0.3em auto; 
+        }
+        .topMsg{
+            padding: 1% 1% 0% 1%; 
+            height: 60%;
+        }
+        .timeMsg{
+            padding: 0px 1% 1% 0px; 
+            display: block;
+            float: right;
+            height: 40%;
+            font-size: 0.9em;;
+        }
+        #points-history, #recent-activity{
+            height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<div class="row search">
+    <div class="card card1">
+        <div class="tab-pane p-3 active preview" style="padding-bottom: 0px" role="tabpanel" id="preview-1006">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link outer active" href="#" aria-current="page" data-content="recent-activity">Recent Activity</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link outer" href="#" data-content="add-new-record">Add New Record</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link outer" href="#" data-content="search-records">Search By Date</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link outer" href="#" data-content="redeem-points">Redeem Points</a>
+                </li>
+                <li class="nav-item" onclick="getPointHistory()">
+                    <a class="nav-link outer" href="#" data-content="points-history">Points History</a>
+                </li>
+                <li class="nav-points"><span><strong>Total points: &nbsp;</strong><span id="totalPoints">{{customerInfo.totalPoints}}</span> points</span></li>
+            </ul>
+        </div>
+        <div class="inner-box">
+            <div id="recent-activity" class="content active" style="padding-right: 1%;">
+                {{#if (isEmptyArray customerInfo.dateRecord)}}
+                    <div class="noRecord">No record found for <strong>{{customerInfo.qid}}</strong></div>
+                {{else}}
+                    {{#each customerInfo.dateRecord}}
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <strong>{{this.date}}</strong>
+                                <span class="points-right"><strong>Points Received: </strong>{{totalDayPoints this.data}} points</span>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Waste Name</th>
+                                            <th>Category</th>
+                                            <th>Weight in grams(g)</th>
+                                            <th>Points Recieved</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each this.data}}
+                                            <tr>
+                                                <td>{{this.wasteType}}</td>
+                                                <td>{{this.category}}</td>
+                                                <td>{{this.weight}}</td>
+                                                <td>{{this.points}}</td>
+                                            </tr>
+                                        {{/each}}                            
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    {{/each}}
+                    <p>For optimal performance, this section displays only the three most recent entries from your waste disposal records. To view a specific date search, head over to the "Search Records" tab.</p>
+                {{/if}}
+            </div>
+            <div id="add-new-record" class="content">
+                <div class="new-record">
+                    <div class="row alert-row" style="display: none;" id="alertD">
+                        <div class="alert alert-danger" role="alert" >Please enter valid info</div>
+                    </div>
+                    <div class="row alert-row" style="display: none;" id="alertS">
+                        <div class="alert alert-success" role="alert" >You Have Successfully Added the Record</div>
+                    </div>
+                    <div class="row g-3">
+                        <input type="text" hidden value="{{customerInfo.qid}}" id="qid" name="qid">
+                        <div class="col">
+                            <input class="form-control" id="wasteType" type="text" name="wasteType" placeholder="Waste Type/ Waste Name">
+                        </div>
+                        <div class="col">
+                            <select class="form-select" name="category" id="category">
+                                <option selected value="Plastic">Plastic</option>
+                                <option value="Paper">Paper</option>
+                                <option value="Glass">Glass</option>
+                                <option value="Metal">Steel/Aluminum</option>
+                                <option value="Textile">Textile</option>
+                                <option value="Yard Waste">Yard Waste</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" id="weight" type="number" step="any" name="weight" placeholder="Weight in Grams">
+                        </div>
+                        <div class="row g-3">
+                            <input class="user-submit" type="submit" value="Add Record" onclick="validateRecord()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="search-records" class="content">
+                <div class="search">
+                    <div class="row g-3">
+                        <div class="col">
+                            <input class="form-control" type="date" id="date">
+                        </div>        
+                        <div class="col">
+                            <input class="user-submit" value="Search" type="submit" onclick="searchRecords()" style="margin: 0px 15%; padding: 1.7%;">
+                        </div>              
+                    </div>
+                </div>
+                <div class="row alert-row" style="display: none;" id="alertRecord">
+                    <div class="alert alert-danger" role="alert" >No record found</div>
+                </div>
+                <div class="row g-3" id="record-found" style="display: none;">
+
+                </div>
+            </div>
+            <div id="redeem-points" class="content">
+                <div class="row g-3">
+                    <input class="point-convert" type="submit" value="Convert Points to Qatari Riyal" onclick="convertPoints()">
+                    <div class="alert alert-success" role="alert" id="convertPointMsg" style="display: none;"></div>
+                    <div class="alert alert-danger" role="alert" id="convertPointErrMsg" style="display: none;"></div>
+                </div>
+            </div>
+            <div id="points-history" class="content">
+                <div class="row g-3" id="pointsHistory" style="--cui-gutter-y: 0.5rem; --cui-gutter-x: -10rem;">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const tabLinks = document.querySelectorAll('.nav-link');
+    const contentAreas = document.querySelectorAll('.content');
+
+    function switchTab(clickedLink) {
+        if (clickedLink.classList.value == "nav-link outer" && clickedLink.dataset.content == "recent-activity"){
+            window.location.reload();
+        }
+        
+        tabLinks.forEach(link => link.classList.remove('active'));
+        contentAreas.forEach(content => content.classList.remove('active'));
+
+        const contentId = clickedLink.dataset.content;
+        const targetContent = document.getElementById(contentId);
+        clickedLink.classList.add('active');
+        targetContent.classList.add('active');
+    }
+
+    const storedActiveTabId = localStorage.getItem('activeTabId');
+
+    if (storedActiveTabId) {
+        const link = document.querySelector(`.nav-link[data-content="${storedActiveTabId}"]`);
+    if (link) {
+        switchTab(link);
+    }
+    }
+
+    tabLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchTab(this);
+
+        const contentId = this.dataset.content;
+        localStorage.setItem('activeTabId', contentId);
+    });
+    });
+
+    async function validateRecord() {
+        let wasteNameInput = document.getElementById('wasteType').value;
+        let weightInput = document.getElementById('weight').value;
+        let category = document.getElementById('category').value;
+        let qid = document.getElementById('qid').value;
+
+        if (wasteNameInput.trim() === "" || isNaN(weightInput) || weightInput.trim() === "") {
+            let messageD = document.getElementById("alertD")
+            messageD.style.display = "block"
+            let messageS = document.getElementById("alertS")
+            messageS.style.display = "none"
+            return
+        }
+        document.getElementById('wasteType').value = "";
+        document.getElementById('weight').value = "";
+        let messageD = document.getElementById("alertD")
+        messageD.style.display = "none"
+        let messageS = document.getElementById("alertS")
+        messageS.style.display = "block"
+        let update={
+                    wasteNameInput: wasteNameInput,
+                    weightInput: weightInput,
+                    category: category,
+                }
+        await fetch(`/api/${qid}/info`,{
+            method:"PUT",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(update)
+        }) 
+        let response = await fetch(`/api/${qid}/user`)
+        let userData = await response.json();
+        document.getElementById('totalPoints').innerHTML = userData.totalPoints
+    }
+
+    async function convertPoints(){
+        let qid = {{customerInfo.qid}}
+        let response = await fetch(`/api/${qid}/user`)
+        let userData = await response.json();
+        let points = userData.totalPoints
+        let messageD = document.getElementById('convertPointErrMsg')
+        let messageS = document.getElementById('convertPointMsg')
+
+        if (points < 31){
+            messageD.innerHTML = "Not enough points to redeem"
+            messageD.style.display = "block"
+            messageS.style.display = "none"
+            return
+        }
+
+        let cash = Math.floor(points/30)
+        let remainingPoints = points%30
+        messageS.innerHTML = `Please pay your customer a sum of ${cash} riyals`
+        messageS.style.display = "block"
+        messageD.style.display = "none"
+        let update = {points: remainingPoints, cash: cash}
+        
+        await fetch(`/api/${qid}/info`,{
+            method:"PATCH",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(update)
+        })
+        document.getElementById('totalPoints').innerHTML = remainingPoints
+    }
+    async function searchRecords(){
+        let date = document.getElementById("date").value.split('-')
+        let response = await fetch(`/api/{{customerInfo.qid}}/user`)
+        let userData = await response.json();
+        if(date == "" || !userData.dateRecord[0]){
+            document.getElementById("alertRecord").style.display = "block";
+            document.getElementById("record-found").style.display = "none";
+            return
+        }
+        
+        let year = date[0]
+        let month = Number(date[1])
+        let day = Number(date[2])
+        let formattedDate = `${month}/${day}/${year}`;
+        
+        for (let c of userData.dateRecord){
+            if(c.date == formattedDate){
+                document.getElementById("alertRecord").style.display = "none";
+                let dailyPoints = 0
+                for (let i of c.data){
+                    dailyPoints += i.points
+                }
+                let html = `
+                <div class="card mb-3" style="padding: 0px;">
+                            <div class="card-header">
+                                <strong>${c.date}</strong>
+                                <span class="points-right"><strong>Points Received: ${dailyPoints}</strong> points</span>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Waste Name</th>
+                                            <th>Category</th>
+                                            <th>Weight in grams(g)</th>
+                                            <th>Points Recieved</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`
+                for (let i of c.data){
+                    html+=`
+                    <tr>
+                        <td>${i.wasteType}</td>
+                        <td>${i.category}</td>
+                        <td>${i.weight}</td>
+                        <td>${i.points}</td>
+                    </tr>    
+                    `
+                }                         
+                html += `                                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                `
+                document.getElementById("record-found").style.display = "block";
+                document.getElementById("record-found").innerHTML = html;
+                break;
+            }
+            else{
+                document.getElementById("alertRecord").style.display = "block";
+                document.getElementById("record-found").style.display = "none";
+            }
+        } 
+    }
+    async function getPointHistory(){
+        let response = await fetch(`/api/{{customerInfo.qid}}/user/point`)
+        let pointHistory = await response.json();
+        let previousDate;
+        let html = ``;
+
+        for (let c of pointHistory){
+            let date = new Date(c.date).toLocaleString().split(", ")
+            if (date[0] != previousDate && previousDate){
+                html += "<hr style='border-top: 2px solid; color: white; opacity: 0.4;'>"
+            }
+            previousDate = date[0]
+            if(c.type == "add"){
+                html+=`
+                        <div class="add" style="background: #ffdcbd; outline: 2px #be7d07 solid; border-radius: 0.3rem">
+                            <div class="topMsg"><strong>${date[0]}: </strong>${c.point} points have been added to user's account. <strong>Current balance: ${c.balance} points</strong></div>
+                            <div class="timeMsg">${date[1]}</div>
+                        </div>`
+            }
+            else{
+                html+=`
+                        <div class="redeem" style="background: #d1fcdd; outline: 2px #14a714 solid; border-radius: 0.3rem">
+                            <div class="topMsg"><strong>${date[0]}: </strong>${c.point} points(QR. ${c.point/30}) have been redeemed from user's account. <strong>Current balance: ${c.balance} points</strong></div>
+                            <div class="timeMsg">${date[1]}</div>
+                        </div>`
+            }
+        }
+        document.getElementById("pointsHistory").innerHTML = html;
+    }
+</script>
+
