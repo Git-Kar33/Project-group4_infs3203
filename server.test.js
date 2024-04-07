@@ -1,12 +1,5 @@
 const business = require('./business.js');
-const request = require('supertest');
-const { app, server } = require('./presentation');
 
-
-
-
- 
- 
 
   // Test case for insertUser
   it('Inserting User to database', async () => {
