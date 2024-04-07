@@ -1,9 +1,9 @@
-name: CI / CD Testing
+name: CI / CD development
 
 on:
   push:
     branches:
-      - testing
+      
 
 jobs:
   test:
@@ -25,4 +25,9 @@ jobs:
     - name: Run tests
       run: npm run test
 
-    
+    - name: Push changes to testing1 branch
+      uses: ad-m/github-push-action@master
+      with:
+        branch: main
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
