@@ -1,0 +1,64 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap">
+    <style>
+        .search{
+            justify-content: center;
+            align-items: center;
+        }
+        .user-submit{
+            display: block;
+            margin: 0 auto;
+            width: 45%;
+            border: none;
+            padding: 7px 0 7px 0;
+            border-radius: 10px;
+            background: linear-gradient(0deg, #00CEA8 -114.15%, #3C2E6B 167.92%);
+            box-shadow: -6px 4px 4px 0px rgba(0, 0, 0, 0.47);
+            color: #EFEFEF;
+            text-shadow: -4px 4px 4px rgba(0, 0, 0, 0.25);
+            font-family: 'Archivo Black';
+            font-size: 1.2em;
+            font-style: normal;
+            font-weight: 200;
+            line-height: normal;
+            align-items: center;
+            transition: all 0.4s ease-in-out; 
+        }
+        .user-submit:hover{
+            background: linear-gradient(182deg, #3affdb -114.15%, #3C2E6B 167.92%)
+        }
+        .id{
+            width: 100%;
+            border: none;
+            font-size: 1.4em;
+            background: #E8F3F8;
+            box-shadow: -6px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            padding: 2%;
+            margin: 7px 0 50px 0;
+        }
+        .card1 {
+            width: 38rem;
+            background: #C6DDE7;
+            box-shadow: -17px 15px 4px 0px rgba(0, 0, 0, 0.13);
+            padding: 4em 2em 4em 2em;
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .form1{
+            width:  25em;
+        }
+    </style>
+</head>
+<div class="row search">
+    <div class="card card1">
+        {{#if message}}
+            <div class="alert alert-danger" role="alert">{{message}}</div>
+        {{/if}}
+        <form class="form1" method="get" action="/info">
+            <label style="font-size: 1.1em; font-weight: 400">Qatar Id:</label><br>
+            <input class="form-control id" type="text" placeholder="12345678910" id="qid" name="qid">
+            <input class="user-submit" type="submit" value="Submit">
+        </form>
+    </div>
+</div>
