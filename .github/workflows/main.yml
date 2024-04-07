@@ -30,7 +30,14 @@ jobs:
       run: rm -rf .github/workflows
 
     - name: Add all files except workflows directory
-      run: git add -A && git reset -- .github/workflows
+      run: |
+          git add -A
+          git reset -- .github/workflows
+
+    - name: Set author's identity
+      run: |
+          git config user.email "you@example.com"
+          git config user.name "Your Name"
 
     - name: Commit changes
       run: git commit -m "Exclude .github/workflows directory from push"
