@@ -23,6 +23,9 @@ jobs:
     - name: Remove .github/workflows directory
       run: rm -rf .github/workflows
 
+    - name: List files in directory
+      run: ls -a
+
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
       with:
