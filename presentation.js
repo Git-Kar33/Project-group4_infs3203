@@ -3,6 +3,9 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const business = require('./business.js')
 
+
+
+
 let app = express()
 const handlebars = require('express-handlebars')
 app.set('views', __dirname+"/templates")
@@ -133,6 +136,6 @@ app.patch(`/api/:qid/info`, async(req,res)=>{
     await business.insertPointData(req.params.qid, currentDate, req.body.points, "redeem", req.body.cash*30)
     res.send("ok")
 })
-// Test Test
-// app.use(function404)
-// app.listen(5000, () => { console.log("Running")})
+
+app.use(function404)
+app.listen(5000, () => { console.log("Running")})
