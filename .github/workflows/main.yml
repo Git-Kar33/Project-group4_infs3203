@@ -34,23 +34,10 @@ jobs:
         git add -A
         git reset -- .github/workflows
 
-    - name: Set author's identity
-      run: |
-        git config user.email "djekram33@gmail.com"
-        git config user.name "Ekram karim"
-
-    - name: Configure pull strategy
-      run: git config pull.rebase true
-
-
-    - name: Pull latest changes from staging
-      run: git pull origin staging
-
-    - name: Commit changes
-      run: git commit -m "Exclude .github/workflows directory from push"
-
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
       with:
         branch: staging
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }} staging
+
+   
