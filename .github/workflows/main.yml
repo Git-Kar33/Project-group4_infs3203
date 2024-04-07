@@ -3,6 +3,7 @@ name: CI / CD development
 on:
   push:
     branches:
+    - development
       
 
 jobs:
@@ -28,6 +29,6 @@ jobs:
     - name: Push changes to testing1 branch
       uses: ad-m/github-push-action@master
       with:
-        branch: main
+        branch: staging
         github_token: ${{ secrets.GITHUB_TOKEN }}
         force: true
