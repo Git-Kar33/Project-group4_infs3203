@@ -27,9 +27,16 @@ jobs:
       - name: Remove .github/workflows directory
         run: rm -rf .github
 
+      - name: Stash changes
+        run: git stash
+
+      - name: Pull changes from staging and rebase
+        run: git pull origin staging --rebase
+
       - name: Push changes to staging (force push)
-        run: |
-          git pull origin staging --rebase
-          git push origin HEAD:staging --force
+        run: git push origin HEAD:staging --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Apply stashed changes
+        run: git stash apply
