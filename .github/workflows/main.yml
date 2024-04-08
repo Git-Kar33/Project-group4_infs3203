@@ -36,5 +36,5 @@ jobs:
         branch: staging
         github_token: ${{ secrets.GITHUB_TOKEN }}
         exclude: .github/
-        
+        force: true
    
