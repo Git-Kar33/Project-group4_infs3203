@@ -1,11 +1,11 @@
-name: CI / CD Development
+name: CI / CD Staging
 
 on:
   push:
     paths-ignore: 
       - .github/workflows/dev.yml
     branches:
-       - development
+       - staging
 
 jobs:
   test:
@@ -26,13 +26,3 @@ jobs:
 
     - name: Run tests
       run: npm run test
-
-    - name: Remove .github/workflows directory
-      run: rm -rf .github
-
-    - name: Push changes to staging branch
-      uses: ad-m/github-push-action@master
-      with:
-        branch: staging
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
