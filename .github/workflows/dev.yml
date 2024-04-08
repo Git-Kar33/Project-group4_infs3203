@@ -3,7 +3,7 @@ name: CI / CD Development
 on:
   push:
     paths-ignore: 
-      - .github/workflows/main.yml
+      - .github/workflows/dev.yml
     branches:
        - development
 
