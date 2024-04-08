@@ -46,3 +46,7 @@ Community Engagement: Through our rewards system, we aim to foster a sense of co
 Figma Prototype - https://www.figma.com/file/0AuzNTD8F7qaRCmzL6bIcK/Untitled?type=design&node-id=0%3A1&mode=design&t=y5UepVJN5j00hmQT-1
 
 Powerpoint Presentation - https://drive.google.com/drive/u/1/my-drive
+
+Project Documentatin -  https://docs.google.com/document/d/1dDutoSvffgDyqPVYZW4NwKvoaNJvLNqV/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true
+
+Final Reporting - https://docs.google.com/document/d/1ZlAfRXJFntzXZ0YyyI39JebP8hv5l48R/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true 
