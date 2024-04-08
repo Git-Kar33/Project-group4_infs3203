@@ -1,0 +1,56 @@
+How to Install:
+MongoDB 
+1.	Go to your browser.
+2.	Go to https://www.mongodb.com/try/download/compass
+3.	Scroll down until you see MongoDB Community Edition/MongoDB Community Server Download.
+4.	Click on the green download button to download.
+5.	Open MongoDB Compass.
+6.	Copy and paste this URI “mongodb+srv://60102524:12class34@cluster0.u1ve744.net/” in the text field.
+7.	Click on connect to enter the database.
+
+NodeJS
+1.	Open any browser.
+2.	Go to https://nodejs.org/en/download
+3.	Click on the green download button.
+4.	Run the downloaded file and install it as per the instructions.
+5.	Don’t forget to add to path during the instructions.
+6.	The rest are default.
+
+Visual Studio Code
+1.	Open any browser.
+2.	Go to https://code.visualstudio.com/download
+3.	Click on the blue windows button on the left if you have a Windows OS.
+4.	Click on the blue Mac button on the right if you’re a Mac user.
+5.	Install the downloaded file and run through the setup.
+
+To run the program:
+1.	Open visual Studio code
+2.	Open the folder where your file is located. 
+3.	Click on Terminal on the left top corner.
+4.	Click on new terminal.
+5.	Type “npm install”
+6.	Type “node presentation.js” to run the program.
+
+IF THE PROGRAM SHOWS ERROR (DO THIS ONLY IF THERE IS AN ERROR!!)
+
+1.	Open the terminal in Visual Studio code.
+2.	Type “npm install node” to install node in Visual Studio.
+3.	“npm install express” to install express.
+4.	“npm install cookie” to install cookie.
+5.	“npm install mongodb” to install mongodb.
+6.	“npm install express-handlebars” to install handlebars.
+7.	Type “node presentation.js” in the terminal to run the program.
+
+To Open your application:
+1.	Open your browser.
+2.	Go to 127.0.0.1:5000 (port number)
+3.	Click on Login
+4.	Enter your credentials to access your account.
+
+Here are the sample user accounts to see the website functionalities:
+Username: admin1
+Password: 1234
+
+Username: admin2
+Password: 1234
+
