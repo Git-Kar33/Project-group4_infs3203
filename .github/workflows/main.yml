@@ -38,9 +38,3 @@ jobs:
         run: git push origin HEAD:staging --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Apply stashed changes
-        run: |
-          git stash apply || true
-          git add . # Add any changes resulting from stash apply
-          git commit -m "Resolve conflicts"
