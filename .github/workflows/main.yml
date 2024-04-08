@@ -31,19 +31,9 @@ jobs:
 
     - name: check the list
       run: ls -a
-
-    - name: Add changes (excluding a directory)
-      run: |
       
-        git reset .github/ 
-         
-
-
-      
-    - name: Push changes to staging
-      uses: ad-m/github-push-action@master
-      with:
-        branch: staging
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+    - name: Push changes to staging (force push)
+      run: git push --force origin HEAD:staging
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    
