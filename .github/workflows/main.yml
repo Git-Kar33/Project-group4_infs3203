@@ -29,15 +29,17 @@ jobs:
     - name: Removing cached file
       run: git rm -r --cached .github
 
-    - name: Remove .github/workflows directory
-      run: rm -rf .github
+   
 
     - name: List files in directory
       run: ls -a
 
     - name: Pull changes from staging branch
-      run: git pull origin staging
+      run: git pull --rebase origin staging
 
+      
+    - name: Remove .github/workflows directory
+      run: rm -rf .github
 
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
