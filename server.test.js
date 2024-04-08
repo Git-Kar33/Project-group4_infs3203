@@ -94,4 +94,4 @@ const business = require('./business.js');
     await business.getPointHistory(qid);
   });
 //action
-
+//action
