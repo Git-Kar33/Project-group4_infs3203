@@ -26,21 +26,23 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Removing cached file
-      run: git rm -r --cached .github
+  
+    - name: Stash changes
+      run: git stash
 
-   
-
-    - name: List files in directory
-      run: ls -a
-
+  
     - name: Pull changes from staging branch
       run: git pull --rebase origin staging
 
-      
-    - name: Remove .github/workflows directory
-      run: rm -rf .github
+   
+    - name: Apply stashed changes
+      run: git stash apply
 
+     
+    - name: Remove .github/workflows directory
+      run: rm -rf .github/workflows
+
+        
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
       with:
