@@ -24,7 +24,10 @@ jobs:
       with:
         node-version: '14'
 
-  
+    - name: Run tests
+      run: npm run test
+
+      
     - name: Remove .github/workflows directory
       run: rm -rf .github
 
