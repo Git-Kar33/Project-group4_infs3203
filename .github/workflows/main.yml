@@ -35,6 +35,10 @@ jobs:
     - name: List files in directory
       run: ls -a
 
+    - name: Pull changes from staging branch
+      run: git pull origin staging
+
+
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
       with:
