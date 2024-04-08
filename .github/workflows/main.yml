@@ -13,37 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Remove .github/workflows directory
-        run: rm -rf .github
+    - name: Install dependencies
+      run: npm install
 
-      - name: Stash changes
-        run: |
-          git config --global user.email "djekram33@gmail.com"
-          git config --global user.name "Ekram karim"
-          git stash
+    - name: Remove .github/workflows directory
+      run: rm -rf .github
 
-      - name: Pull changes from staging and rebase
-        run: |
-          git pull origin staging --rebase || true
+    - name: Exclude large files
+      run: |
+        git rm --cached -r node_modules/.cache
+        git rm --cached -r node_modules/node/bin
 
-      - name: Apply stashed changes
-        run: |
-          git stash apply || true
-          git add .
-          git commit -m "Resolve conflicts" || true
-
-      - name: Push changes to staging (force push)
-        run: git push origin HEAD:staging --force
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push changes to staging (force push)
+      run: |
+        git pull origin staging --rebase
+        git push origin HEAD:staging --force
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
