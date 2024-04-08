@@ -2,10 +2,10 @@ name: CI / CD development
 
 on:
   push:
-      paths-ignore:
-         - .github
-                  branches:
-                     - development
+    paths-ignore:
+      - .github
+    branches:
+      - development
       
 
 jobs:
