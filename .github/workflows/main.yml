@@ -2,11 +2,8 @@ name: CI / CD development
 
 on:
   push:
-    paths-ignore: 
-      - .github/workflows/main.yml
     branches:
       - development
-      
 
 jobs:
   test:
@@ -14,28 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
       
-    - name: Remove .github/workflows directory
-      run: rm -rf .github
+      - name: Remove .github/workflows directory
+        run: rm -rf .github
 
-    - name: check the list
-      run: ls -a
-      
-    - name: Push changes to staging (force push)
-      run: 
-        git pull origin staging
-        git push origin HEAD:staging
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   
+      - name: Push changes to staging (force push)
+        run: |
+          git pull origin staging
+          git push origin HEAD:staging
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
