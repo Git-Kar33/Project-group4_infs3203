@@ -27,9 +27,6 @@ jobs:
       - name: Remove .github/workflows directory
         run: rm -rf .github
 
-      - name: Stash changes
-        run: git stash
-
       - name: Pull changes from staging and rebase
         run: |
           git pull origin staging --rebase || true
