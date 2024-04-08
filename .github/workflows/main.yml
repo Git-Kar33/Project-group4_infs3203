@@ -2,10 +2,9 @@ name: CI / CD development
 
 on:
   push:
-    paths-ignore: 
-      - .github/workflows/main.yml
-    branches:
-      - development
+    paths-ignore:
+      - node_modules/.cache/**
+      - node_modules/node/bin/**
 
 jobs:
   test:
@@ -13,28 +12,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Remove .github/workflows directory
-      run: rm -rf .github
+      - name: Remove large files from index
+        run: |
+          git add -f node_modules/.cache
+          git add -f node_modules/node/bin
+          git rm --cached -r node_modules/.cache
+          git rm --cached -r node_modules/node/bin
 
-    - name: Exclude large files
-      run: |
-        git rm --cached -r node_modules/.cache
-        git rm --cached -r node_modules/node/bin
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Remove large files from index" || true
 
-    - name: Push changes to staging (force push)
-      run: |
-        git pull origin staging --rebase
-        git push origin HEAD:staging --force
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes to staging (force push)
+        run: git push origin HEAD:staging --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
