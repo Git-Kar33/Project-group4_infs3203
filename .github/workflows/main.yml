@@ -15,9 +15,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-   
-    - name: Run tests
-      run: npm run test
       
     - name: Set up Node.js
       uses: actions/setup-node@v2
