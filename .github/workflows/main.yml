@@ -15,9 +15,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm install
-
+   
     - name: Run tests
       run: npm run test
       
@@ -29,10 +27,14 @@ jobs:
   
     - name: Remove .github/workflows directory
       run: rm -rf .github
+
+    - name: check the list
+      run: ls -a
       
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
       with:
         branch: staging
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
    
