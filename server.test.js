@@ -99,7 +99,7 @@ const business = require('./business.js');
 //action
 //run
 //another action
-/action
+//action
 //action
 //tripple
 //droupple aciton
