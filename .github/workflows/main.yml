@@ -31,7 +31,8 @@ jobs:
         run: git stash
 
       - name: Pull changes from staging and rebase
-        run: git pull origin staging --rebase
+        run: |
+          git pull origin staging --rebase || true
 
       - name: Push changes to staging (force push)
         run: git push origin HEAD:staging --force
