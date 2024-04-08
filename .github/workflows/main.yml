@@ -37,13 +37,13 @@ jobs:
         run: |
           git pull origin staging --rebase || true
 
+      - name: Apply stashed changes
+        run: |
+          git stash apply || true
+          git add .
+          git commit -m "Resolve conflicts" || true
+
       - name: Push changes to staging (force push)
         run: git push origin HEAD:staging --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Apply stashed changes
-        run: |
-          git stash apply || true
-          git add . # Add any changes resulting from stash apply
-          git commit -m "Resolve conflicts"
