@@ -2,6 +2,8 @@ name: CI / CD development
 
 on:
   push:
+    paths-ignore: 
+      - .github/workflows/main.yml
     branches:
       - development
 
@@ -27,7 +29,7 @@ jobs:
 
       - name: Push changes to staging (force push)
         run: |
-          git pull origin staging
-          git push origin HEAD:staging
+          git pull origin staging --rebase
+          git push origin HEAD:staging --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
