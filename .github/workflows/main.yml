@@ -33,7 +33,9 @@ jobs:
       run: ls -a
       
     - name: Push changes to staging (force push)
-      run: git push origin HEAD:staging
+      run: 
+        git pull origin staging
+        git push origin HEAD:staging
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
    
