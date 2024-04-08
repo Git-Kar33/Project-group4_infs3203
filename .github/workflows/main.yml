@@ -2,8 +2,6 @@ name: CI / CD development
 
 on:
   push:
-    paths-ignore:
-      - .github
     branches:
       - development
       
