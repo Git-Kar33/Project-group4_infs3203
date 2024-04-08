@@ -31,12 +31,19 @@ jobs:
 
     - name: check the list
       run: ls -a
+
+    - name: Add changes (excluding a directory)
+      run: |
+      
+        git reset .github/ 
+         
+
+
       
     - name: Push changes to staging
       uses: ad-m/github-push-action@master
       with:
         branch: staging
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        exclude: .github/
         force: true
    
