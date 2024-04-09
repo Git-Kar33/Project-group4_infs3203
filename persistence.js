@@ -98,6 +98,22 @@ async function deleteSession(key){
     await session.deleteOne({sessionKey:key});
 }
 
+async function deleteCustomer(qid){
+    await connectDatabase();
+    await customerData.deleteMany({qid:qid});
+}
+
+async function deleteUser(username){
+    await connectDatabase();
+    await user.deleteMany({username:username});
+}
+
+async function deletePointData(qid){
+    await connectDatabase();
+    await pointHistory.deleteMany({qid:qid});
+}
+
 module.exports={
-    insertUser, insertCustomer, insertPointData, getUserDetails, getPointHistory, addRecord, getCustomerDetails, updatePoints, saveSession, getSessionData, deleteSession
+    insertUser, insertCustomer, insertPointData, getUserDetails, getPointHistory, addRecord, getCustomerDetails, updatePoints, saveSession, getSessionData,
+    deleteSession, deleteCustomer, deleteUser, deletePointData
 }
