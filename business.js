@@ -103,7 +103,20 @@ async function deleteSession(key){
   return await persistence.deleteSession(key);
 }
 
+async function deleteCustomer(qid){
+    return await persistence.deleteCustomer(qid);
+}
+
+async function deleteUser(username){
+    return await persistence.deleteUser(username);
+}
+
+async function deletePointData(qid){
+    return await persistence.deletePointData(qid);
+}
+
 module.exports={
-    insertUser, insertCustomer, getCustomerDetails, validID, insertPointData, getPointHistory, checkLogin, addRecord, getPoints, updatePoints, startSession, getSessionData, deleteSession,
+    insertUser, insertCustomer, getCustomerDetails, validID, insertPointData, getPointHistory, checkLogin, addRecord, getPoints, updatePoints, startSession, getSessionData,
+     deleteSession, deletePointData, deleteUser, deleteCustomer
 
 }
