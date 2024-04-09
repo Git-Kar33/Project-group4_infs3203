@@ -3,9 +3,6 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const business = require('./business.js')
 
-
-
-
 let app = express()
 const handlebars = require('express-handlebars')
 app.set('views', __dirname+"/templates")
