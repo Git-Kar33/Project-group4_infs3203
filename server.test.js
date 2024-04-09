@@ -1,113 +1,83 @@
-const business = require('./business.js');
-
+const business = require('./business.js')
+const persistence = require("./persistence.js")
 
   // Test case for insertUser
-  it('Inserting User to database', async () => {
-    //let hashed =
-    const userData = { username: 'testuser', password: '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4' }; //password='testpassword'
-    const invalidUser = await business.checkLogin('testuser', '1234');
-    if(!invalidUser){
-      await business.insertUser(userData);//.resolves.not.toThrow();
-    }
-  });
-
-
-  it('checkLogin should validate user credentials', async () => {
-    const validUser = await business.checkLogin('testuser', '1234');
-    expect(validUser).toBe(true);
-  
-    const invalidUser = await business.checkLogin('testuser', 'wrongpassword');
-    expect(invalidUser).toBe(false);
-  
-    
+    it('Inserting User to database', async () => {
+        const userData = { username: 'testuser', password: '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4' }; //password='testpassword'
+        await business.insertUser(userData);
+        let checkUserData = await persistence.getUserDetails(userData.username);
+        expect(checkUserData.username).toBe(userData.username);
+        expect(checkUserData.password).toBe(userData.password);
     });
-  
-  // Test case for insertCustomer
-  it('Inserting customer records to database', async () => {
-    const customerData = { qid: '12345678901', totalPoints: 0, dateRecord: [] };
-    const getCustomer = await business.checkLogin('testuser', '1234');
-    if(!getCustomer){
-      await business.insertCustomer(customerData);//.resolves.not.toThrow();
-    }
-  });
 
-  // Test case for getCustomerDetails
-  it('Getting Customer details from database', async () => {
-    const retrievedCustomer = await business.getCustomerDetails('12345678901');
-    expect(retrievedCustomer).toBeDefined();
-    expect(retrievedCustomer.qid).toBe('12345678901');
-  });
+    // Test case for checkLogin
+    it('checkLogin should validate user credentials', async () => {
+        const validUser = await business.checkLogin('testuser', '1234');
+        expect(validUser).toBe(true);
+      
+        const invalidUser = await business.checkLogin('testuser', 'wrongpassword');
+        expect(invalidUser).toBe(false);
 
-  // Test case for addRecord
-  it('addRecord should add a record to the customer data in the database', async () => {
-    const currentDate = new Date();
-    const qid = '12345678901';
-    const wasteType = 'Plastic';
-    const category = 'Recyclable';
-    const weight = 10;
-    const pointsReceived = 20;
-    await business.addRecord(currentDate, qid, wasteType, category, weight, pointsReceived);
-  });
+        await business.deleteUser("testuser");
+    });
 
+    // Test case for insertCustomer
+    it('Inserting customer records to database', async () => {
+            const customerData = { qid: '20235604099', totalPoints: 0, dateRecord: [] };
+            await business.insertCustomer(customerData);
+            let checkCustomerData = await business.getCustomerDetails(customerData.qid);
+            expect(checkCustomerData.qid).toBe('20235604099');
+            expect(checkCustomerData.totalPoints).toBe(0);
+            expect(checkCustomerData.dateRecord).toEqual([]);
+        });
 
-  it('validID should validate Qatari IDs', async () => {
-    expect(await business.validID('22335678901')).toBe(true);
-    expect(await business.validID('1234567890')).toBe(false); // Invalid length
-    expect(await business.validID('12345678902')).toBe(false); // Invalid first digit
-    expect(await business.validID('A2345678901')).toBe(false); // Non-numeric
-});
-  // Test case for getPoints
-  it('getPoints should retrieve points for a given category', async () => {
-    expect(await business.getPoints('Paper')).toBe(1);
-    expect(await business.getPoints('Plastic')).toBe(2);
-    expect(await business.getPoints('Metal')).toBe(3);
-  });
+    // Test case for addRecord
+    it('addRecord should add a record to the customer data in the database', async () => {
+        const currentDate = new Date();
+        const qid = '20235604099';
+        const wasteType = 'Plastic Water bottle';
+        const category = 'Plastic';
+        const weight = 1000;
+        const point = await business.getPoints(category);
+        expect(point).toBe(2);
+        await business.addRecord(currentDate.toLocaleDateString(), qid, wasteType, category, weight, point*weight);
+    });
 
-  // Test case for updatePoints
-  it('updatePoints should update the total points for a customer', async () => {
-    const qid = '12345678901';
-    const newPoints = 50;
-    await business.updatePoints(qid, newPoints);
-  });
+    // Test case for valid qid
+    it('validID should validate Qatari IDs', async () => {
+        expect(await business.validID('22335678901')).toBe(true);
+        expect(await business.validID('1234567890')).toBe(false); // Invalid length
+        expect(await business.validID('12345678902')).toBe(false); // Invalid first digit
+        expect(await business.validID('A2345678901')).toBe(false); // Non-numeric
+    });
 
-  // Test case for startSession
-  it('startSession should initiate a new session for the user', async () => {
-    const sessionData = { username: 'testuser' };
-    business.startSession(sessionData);
-  });
+    // Test case for getPoints
+    it('getPoints should retrieve points for a given category', async () => {
+        expect(await business.getPoints('Paper')).toBe(1);
+        expect(await business.getPoints('Plastic')).toBe(2);
+        expect(await business.getPoints('Metal')).toBe(3);
+    });
 
-  // Test case for deleteSession
-  it('deleteSession should delete a session from the database', async () => {
-    const key = 'abc123';
-    await business.deleteSession(key);
-  });
+    // Test case for updatePoints
+    it('updatePoints should update the total points for a customer', async () => {
+        const qid = '20235604099';
+        const newPoints = 50;
+        await business.updatePoints(qid, newPoints);
+        let cData = await business.getCustomerDetails(qid)
+        expect(cData.totalPoints).toBe(newPoints);
+        await business.deleteCustomer(qid);
+      });
 
-  // Test case for insertPointData
-  it('insertPointData should insert point data into the database', async () => {
-    const pointData = { qid: '12345678901', date: new Date(), balance: 100, type: 'Addition', point: 10 };
-    await business.insertPointData(pointData);
-  });
-
-  // Test case for getPointHistory
-  it('getPointHistory should retrieve point history for a customer', async () => {
-    const qid = '12345678901';
-    await business.getPointHistory(qid);
-  });
-//action
-//actio
-//action
-//action
-//run
-//another action
-//action
-//action
-//tripple
-//change change change
-//droupple aciton
-//tacer tacer tacer
-//blah
-//Run run run
-//run the whole thing
-//action action
-//3 test
-//again
+    // Test case for insert and get points
+    it('insertPointData should insert point data into the database', async () => {
+        let currentDate = new Date()
+        const pointData = { qid: '20235604099', date: currentDate, balance: 50, type: 'add', point: 10 };
+        await business.insertPointData(pointData.qid, pointData.date, pointData.balance, pointData.type, pointData.point);
+        let pointHistory = await business.getPointHistory(pointData.qid);
+        expect(pointData.qid).toBe(pointHistory[0].qid);
+        expect(pointData.date).toEqual(new Date(pointHistory[0].date));
+        expect(pointData.balance).toBe(pointHistory[0].balance);
+        expect(pointData.type).toBe(pointHistory[0].type);
+        expect(pointData.point).toBe(pointHistory[0].point);
+        await business.deletePointData(pointData.qid);
+    });
