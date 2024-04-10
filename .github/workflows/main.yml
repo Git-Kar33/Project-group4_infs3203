@@ -38,5 +38,5 @@ jobs:
         application_name: Eco-Reward-System1
         environment_name: Eco-Reward-System-env-1
         version_label: ${{github.sha}}
-        region: us-west-2
+        region: us-east-1
         deployment_package: Project-group4_infs3203-build.zip
