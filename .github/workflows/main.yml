@@ -28,7 +28,7 @@ jobs:
       run: npm run test
 
     - name: Generate Deployment Package
-      run: zip -r Project-group4_infs3203-build.zip
+      run: zip -r Project-group4_infs3203-build.zip .
 
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v21
