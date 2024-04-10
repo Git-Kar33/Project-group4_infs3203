@@ -1,11 +1,11 @@
-name: CI / CD Staging
+name: CI / CD testingtest
 
 on:
   push:
     paths-ignore: 
       - .github/workflows/main.yml
     branches:
-       - main
+       - testingtest
 
 jobs:
   test:
