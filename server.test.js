@@ -81,3 +81,6 @@ const persistence = require("./persistence.js")
         expect(pointData.point).toBe(pointHistory[0].point);
         await business.deletePointData(pointData.qid);
     });
+
+
+//pull in dev test
