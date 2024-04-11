@@ -1,4 +1,4 @@
-name: CI / CD devtest
+name: CI / CD testingtest
 
 
 on:
@@ -6,10 +6,10 @@ on:
     paths-ignore: 
       - .github/workflows/main.yml
     branches:
-       - devtest
+       - testingtest
   pull_request:
     branches:
-       - devtest
+       - testingtest
 
 
 jobs:
