@@ -3,7 +3,10 @@ name: CI / CD Staging
 on:
   push:
     paths-ignore: 
-      - .github/workflows/dev.yml
+      - .github/workflows/testing.yml
+    branches:
+       - staging
+  pull_request:
     branches:
        - staging
 
@@ -15,6 +18,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Remove .github/workflows directory
+      run: |
+        rm -rf .github/workflows
       
     - name: Set up Node.js
       uses: actions/setup-node@v2
