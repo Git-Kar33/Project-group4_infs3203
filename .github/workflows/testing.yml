@@ -2,8 +2,13 @@ name: CI / CD Testing
 
 on:
   push:
+    paths-ignore: 
+      - .github/workflows/testing.yml
     branches:
-      - testing
+       - testing
+  pull_request:
+    branches:
+       - testing
 
 jobs:
   test:
@@ -13,6 +18,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Remove .github/workflows directory
+      run: |
+        rm -rf .github/workflows
       
     - name: Set up Node.js
       uses: actions/setup-node@v2
