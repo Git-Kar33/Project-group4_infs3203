@@ -1,4 +1,4 @@
-name: CI / CD Staging
+name: CI / CD Main
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - .github/workflows/main.yml
     branches:
        - main
+  
 
 jobs:
   test:
@@ -16,6 +17,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
+    - name: Remove .github/workflows directory
+      run: |
+        rm -rf .github/workflows
+  
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
