@@ -6,6 +6,9 @@ on:
       - .github/workflows/main.yml
     branches:
        - testingtest
+  pull_request:
+    branches:
+       - testingtest
 
 jobs:
   test:
