@@ -2,11 +2,13 @@ name: CI / CD devtest
 
 on:
   push:
-  pull_request:
     paths-ignore: 
       - .github/workflows/main.yml
     branches:
-       - developmenttest
+       - devtest
+  pull_request:
+    branches:
+       - devtest
 
 jobs:
   test:
