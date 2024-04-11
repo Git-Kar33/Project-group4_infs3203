@@ -6,6 +6,9 @@ on:
       - .github/workflows/dev.yml
     branches:
        - development
+  pull_request:
+    branches:
+       - development
 
 jobs:
   test:
@@ -15,6 +18,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Remove .github/workflows directory
+      run: |
+        rm -rf .github/workflows
       
     - name: Set up Node.js
       uses: actions/setup-node@v2
