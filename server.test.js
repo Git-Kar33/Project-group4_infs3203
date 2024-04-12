@@ -94,21 +94,21 @@ const business = require('./business.js');
     await business.getPointHistory(qid);
   });
 //action
-//actio
-//action
-//action
-//run
-//another action
-//action
-//action
-//tripple
-//change change change
-//droupple aciton
-//tacer tacer tacer
-//blah
-//Run run run
-//run the whole thing
-//action action
-//3 test
-//again
-//boos boos boos
+app.use(function404);
+
+// Start the server and return the instance
+function startServer(port = 0) {
+    const server = app.listen(port, () => {
+        console.log(`Running on port ${server.address().port}`);
+    });
+
+    // Handle server errors (e.g., port already in use)
+    server.on('error', (err) => {
+        console.error('Server error:', err);
+        process.exit(1);
+    });
+
+    return server;
+}
+
+module.exports = { app, startServer };
