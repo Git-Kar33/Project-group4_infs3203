@@ -5,6 +5,9 @@ on:
     paths-ignore: 
       - .github/workflows/main.yml
     branches:
+       - main      
+  pull_request:
+    branches:
        - main
   
 
@@ -31,3 +34,14 @@ jobs:
 
     - name: Run tests
       run: npm run test
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: back-serv
+        environment_name: back-serv-env
+        version_label: ${{github.sha}}
+        region: ap-south-1
+        deployment_package: Project-group4_infs3203-build.zip
