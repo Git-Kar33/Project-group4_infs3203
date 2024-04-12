@@ -35,8 +35,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: Eco-Reward System
-        environment_name: Eco-RewardSystem-env-1
+        application_name: back-serv
+        environment_name: back-serv-env
         version_label: ${{github.sha}}
-        region: eu-north-1
+        region: ap-south-1
         deployment_package: Project-group4_infs3203-build.zip
