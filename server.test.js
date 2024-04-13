@@ -94,36 +94,4 @@ const business = require('./business.js');
     await business.getPointHistory(qid);
   });
 //action
-//adding end to end testing
-
-describe('GET /info', () => {
-    const qid = '30235604034'; // The QID you want to test
-
-    // Before running the test, set up initial data for the customer and session
-    beforeAll(async () => {
-        // Create initial customer data
-        const customerData = {
-            qid: qid,
-            totalPoints: 100,
-            dateRecord: [
-                { date: '2024-04-10', data: [{ wasteType: 'Plastic', category: 'Plastic', weight: 5, points: 10 }] },
-                { date: '2024-04-11', data: [{ wasteType: 'Metal', category: 'Metal', weight: 3, points: 9 }] }
-            ]
-        };
-        // Insert initial customer data
-        await persistence.insertCustomer(customerData);
-
-        // Create a session and set the session cookie
-        await persistence.saveSession('test-session-key', new Date(Date.now() + 60 * 60 * 1000), { username: 'testuser' });
-    });
-
-    // After the test, clean up the customer data and session
-    afterAll(async () => {
-        // Delete the customer data
-        await persistence.deleteCustomer(qid);
-        // Delete the session
-        await persistence.deleteSession('test-session-key');
-    });
-
-//working workflow check
 
