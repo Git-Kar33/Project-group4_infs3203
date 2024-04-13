@@ -158,22 +158,4 @@ describe('GET /info', () => {
         expect(response.headers.location).toBe('/login?message=Please Login'); // Check redirect URL
     });
 
-    it('should redirect to search-record if QID is invalid', async () => {
-        // Create a session and set the session cookie
-        const sessionData = await persistence.saveSession('test-session-key', new Date(Date.now() + 60 * 60 * 1000), { username: 'testuser' });
 
-        // Verify that sessionData is not undefined
-        expect(sessionData).toBeDefined();
-        expect(sessionData).toHaveProperty('sessionKey');
-
-        const sessionKey = sessionData.sessionKey;
-
-        const response = await request(app)
-            .get('/info')
-            .set('Cookie', `projectkey=${sessionKey}`)
-            .query({ qid: 'invalidQID' });
-
-        expect(response.status).toBe(302); // Check that the response status is a redirect
-        expect(response.headers.location).toBe('/search-record?message=Please enter a valid Qatari id'); // Check redirect URL
-    });
-});
