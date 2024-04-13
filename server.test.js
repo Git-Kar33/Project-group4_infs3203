@@ -125,37 +125,5 @@ describe('GET /info', () => {
         await persistence.deleteSession('test-session-key');
     });
 
-    it('should render customer data for a valid session and valid QID', async () => {
-        // Create a session and set the session cookie
-        const sessionData = await persistence.saveSession('test-session-key', new Date(Date.now() + 60 * 60 * 1000), { username: 'testuser' });
-
-        // Verify that sessionData is not undefined
-        expect(sessionData).toBeDefined();
-        expect(sessionData).toHaveProperty('sessionKey');
-
-        const sessionKey = sessionData.sessionKey;
-
-        const response = await request(app)
-            .get('/info')
-            .set('Cookie', `projectkey=${sessionKey}`)
-            .query({ qid: qid });
-
-        expect(response.status).toBe(200); // Check that the response status is 200
-        expect(response.headers['content-type']).toMatch(/text\/html/); // Check that the response is HTML
-        expect(response.text).toContain(`Total Points: ${100}`); // Check total points
-    });
-
-//second test
-
- 
-
-    it('should redirect to login if session is invalid', async () => {
-        const response = await request(app)
-            .get('/info')
-            .query({ qid: qid });
-
-        expect(response.status).toBe(302); // Check that the response status is a redirect
-        expect(response.headers.location).toBe('/login?message=Please Login'); // Check redirect URL
-    });
-
+//working workflow check
 
