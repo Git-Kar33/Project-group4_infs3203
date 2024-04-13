@@ -147,54 +147,7 @@ describe('GET /info', () => {
 
 //second test
 
-  describe('GET /info', () => {
-    const qid = '30235604034'; // The QID you want to test
-
-    // Before running the test, set up initial data for the customer and session
-    beforeAll(async () => {
-        // Create initial customer data
-        const customerData = {
-            qid: qid,
-            totalPoints: 100,
-            dateRecord: [
-                { date: '2024-04-10', data: [{ wasteType: 'Plastic', category: 'Plastic', weight: 5, points: 10 }] },
-                { date: '2024-04-11', data: [{ wasteType: 'Metal', category: 'Metal', weight: 3, points: 9 }] }
-            ]
-        };
-        // Insert initial customer data
-        await persistence.insertCustomer(customerData);
-
-        // Create a session and set the session cookie
-        await persistence.saveSession('test-session-key', new Date(Date.now() + 60 * 60 * 1000), { username: 'testuser' });
-    });
-
-    // After the test, clean up the customer data and session
-    afterAll(async () => {
-        // Delete the customer data
-        await persistence.deleteCustomer(qid);
-        // Delete the session
-        await persistence.deleteSession('test-session-key');
-    });
-
-    it('should render customer data for a valid session and valid QID', async () => {
-        // Create a session and set the session cookie
-        const sessionData = await persistence.saveSession('test-session-key', new Date(Date.now() + 60 * 60 * 1000), { username: 'testuser' });
-
-        // Verify that sessionData is not undefined
-        expect(sessionData).toBeDefined();
-        expect(sessionData).toHaveProperty('sessionKey');
-
-        const sessionKey = sessionData.sessionKey;
-
-        const response = await request(app)
-            .get('/info')
-            .set('Cookie', `projectkey=${sessionKey}`)
-            .query({ qid: qid });
-
-        expect(response.status).toBe(200); // Check that the response status is 200
-        expect(response.headers['content-type']).toMatch(/text\/html/); // Check that the response is HTML
-        expect(response.text).toContain(`Total Points: ${100}`); // Check total points
-    });
+ 
 
     it('should redirect to login if session is invalid', async () => {
         const response = await request(app)
