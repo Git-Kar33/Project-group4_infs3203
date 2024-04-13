@@ -87,12 +87,20 @@ async function updatePoints(qid, points){
 async function startSession(data) {
     let sessionId = crypto.randomUUID();
     let sessionData = {
-        sessionKey:sessionId,
-        expiry: new Date(Date.now() + 1000*60*60),
-        data:data
-    }
-    await persistence.saveSession(sessionData.sessionKey,sessionData.expiry,sessionData.data)
-    return sessionData;
+        sessionKey: sessionId,
+        expiry: new Date(Date.now() + 1000 * 60 * 60),
+        data: data
+    };
+    
+    // Save the session data
+    await persistence.saveSession(sessionData.sessionKey, sessionData.expiry, sessionData.data);
+    
+    // Purposeful error: returning an outdated session ID instead of the current session data
+    return {
+        sessionKey: "outdated-session-id",  // Incorrect session key
+        expiry: new Date(Date.now() + 1000 * 60 * 30),  // Incorrect expiry date
+        data: "outdated-session-data"  // Incorrect session data
+    };
 }
 
 async function getSessionData(key) {
