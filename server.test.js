@@ -93,23 +93,3 @@ const business = require('./business.js');
     const qid = '12345678901';
     await business.getPointHistory(qid);
   });
-//action
-//actio
-//action
-//action
-//run
-//another action
-//action
-//action
-//tripple
-//change change change
-//droupple aciton
-//tacer tacer tacer
-//blah
-//Run run run
-//run the whole thing
-//action action
-//3 test
-//again
-//boos boos boos
-//check test
