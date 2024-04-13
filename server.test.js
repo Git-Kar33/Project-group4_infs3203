@@ -94,22 +94,4 @@ const business = require('./business.js');
     await business.getPointHistory(qid);
   });
 //action
-app.use(function404);
 
-// Start the server and return the instance
-function startServer(port = 0) {
-    const server = app.listen(port, () => {
-        console.log(`Running on port ${server.address().port}`);
-    });
-
-    // Handle server errors (e.g., port already in use)
-    server.on('error', (err) => {
-        console.error('Server error:', err);
-        process.exit(1);
-    });
-
-    return server;
-}
-
-module.exports = { app, startServer };
-//action workflow push
