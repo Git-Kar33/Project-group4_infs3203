@@ -8,6 +8,9 @@ on:
        - developmenttest
 
 jobs:
+  builds:
+    runs-on: self-hosted
+    
   test:
     name: Run Server Tests
     runs-on: ubuntu-latest
