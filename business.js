@@ -107,3 +107,5 @@ module.exports={
     insertUser, insertCustomer, getCustomerDetails, validID, insertPointData, getPointHistory, checkLogin, addRecord, getPoints, updatePoints, startSession, getSessionData, deleteSession,
 
 }
+
+//Testing
