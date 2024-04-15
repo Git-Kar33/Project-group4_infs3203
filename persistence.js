@@ -101,3 +101,5 @@ async function deleteSession(key){
 module.exports={
     insertUser, insertCustomer, insertPointData, getUserDetails, getPointHistory, addRecord, getCustomerDetails, updatePoints, saveSession, getSessionData, deleteSession
 }
+
+//Testing
