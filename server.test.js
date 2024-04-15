@@ -100,7 +100,7 @@ const { app, server } = require('./presentation');
     const qid = '12345678901';
     await business.getPointHistory(qid);
   });
-chcking tesing
+
 
 //testing
 //testing
