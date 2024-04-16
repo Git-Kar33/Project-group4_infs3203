@@ -44,17 +44,24 @@ Community Engagement: Through our rewards system, we aim to foster a sense of co
 
 ## Applicatioon Details
 
-Database Server - Mongodb - compass
+Database Server - Mongodb - compass <br>
 Application Utility - nodejs, express
 
-*File details*
+**File details**
 
+business.js - This logical file contains the code related to the presentation layer of the application. <br>
 
+persistance.js - This logical file contains the code related to the presentation layer of the application.  <br>
 
+presentation.js - This logical file contains the code related to the presentation layer of the application. It includes functions and components for managing the user interface and user interactions. In the given layer, the mongodb connection is setup as well as all the variables that will be used in the business and presentation layers <br>
 
+server.test.js - Applicatin for testing the main functions of applications 
 
+layouts handlers - loginmainmain  - Application for css layout 
 
+tomplates - customerDat, error404, homepage, login, searchrecord. Application for css layout and design
 
+yml - .github/workflow/<filaname>.yml - yml file for github workflow action for ci/cd pipeline and deployments
 
 
 **Team Contributions**
