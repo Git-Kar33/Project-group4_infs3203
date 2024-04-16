@@ -21,20 +21,20 @@ jobs:
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build Docker image
-        run: docker build -t Git-Kar33/Project-group4_infs3203 .
+        run: docker build -t Git-Kar33/project-group4_infs3203 .
 
       - name: Publish image to Docker Hub
-        run: docker push Git-Kar33/Project-group4_infs3203:latest
+        run: docker push Git-Kar33/project-group4_infs3203:latest
 
   deploy:
     needs: build
     runs-on: [aws-ec2]
     steps:
       - name: Pull image from Docker Hub
-        run: docker pull Git-Kar33/Project-group4_infs3203:latest
+        run: docker pull Git-Kar33/project-group4_infs3203:latest
 
       - name: Delete old container
         run: docker rm -f nodejs-app-container
 
       - name: Run Docker container
-        run: docker run -d -p 5000:5000 --name nodejs-app-container Git-Kar33/Project-group4_infs3203
+        run: docker run -d -p 5000:5000 --name nodejs-app-container Git-Kar33/project-group4_infs3203
