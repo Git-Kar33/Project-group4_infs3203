@@ -42,7 +42,7 @@ Sustainable motive: By rewarding users with points for their waste, we encourage
 Community Engagement: Through our rewards system, we aim to foster a sense of community involvement and responsibility towards waste management.
 
 
-### Applicatioon Details
+## Applicatioon Details
 
 Database Server - Mongodb - compass
 Application Utility - nodejs, express
