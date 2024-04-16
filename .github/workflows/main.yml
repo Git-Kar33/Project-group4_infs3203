@@ -24,7 +24,7 @@ jobs:
         run: docker build -t git-kar33/project-group4_infs3203 .
 
       - name: Publish image to Docker Hub
-        run: docker push git-kar33/project-group4_infs3203:latest
+        run: docker push git-kar33/project-group4_infs3203
 
   deploy:
     needs: build
