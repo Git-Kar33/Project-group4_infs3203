@@ -41,6 +41,33 @@ Sustainable motive: By rewarding users with points for their waste, we encourage
 
 Community Engagement: Through our rewards system, we aim to foster a sense of community involvement and responsibility towards waste management.
 
+
+
+## 
+
+### Bug Identification:
+#### Bug1: The square_root Operation in the Calculator Class Lacks a Condition for Handling Negative Numbers. 
+**Resolution**: Changing the negative operational sign to plus operation sign 
+
+#### Bug2: Enhancement to code for "square_root" operation
+**Resolution**: Adding in if loop to identify related opreation function 
+
+#### Bug3: The modulus operation in the Calculator class cannot have the divisor set to zero
+**Resolution**: Adding in if loop to make sure it is not zero
+
+#### Bug4: The power function in the calculator is producing an error
+**Resolution**: Changing the operation sign to two asterisk to calculate as power
+
+#### Bug5: The subtraction operation in the Calculator class is performing addition
+**Resolution**: Changing the operation sign to subtraction
+
+#### Bug6: The addition operation in the Calculator class is performing subtraction
+**Resolution**: Changing the operation sign to subtraction
+
+
+
+
+
 **Acknowledgement**
 
 Figma Prototype - https://www.figma.com/file/0AuzNTD8F7qaRCmzL6bIcK/Untitled?type=design&node-id=0%3A1&mode=design&t=y5UepVJN5j00hmQT-1
@@ -50,3 +77,5 @@ Powerpoint Presentation - https://drive.google.com/drive/u/1/my-drive
 Project Documentatin -  https://docs.google.com/document/d/1dDutoSvffgDyqPVYZW4NwKvoaNJvLNqV/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true
 
 Final Reporting - https://docs.google.com/document/d/1ZlAfRXJFntzXZ0YyyI39JebP8hv5l48R/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true 
+
+Refer Project explanation - 
