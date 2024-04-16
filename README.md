@@ -31,7 +31,7 @@ Each selected item will be associated with a predefined number of points. For in
 
 **Reward Distribution**
 
-Users will accumulate points based on the waste collected from their designated ID. They can later redeem these points for rewards, such as monetary incentives.
+Users will accumulate points based on the waste collected from their designated ID. They can later redeem these points for rewards, such as monetary incentives or cash. In this application, 30 points are considered as one Qatari riyal.
 
 **Benefits of Eco-Reward System**
 
@@ -57,22 +57,22 @@ presentation.js - This logical file contains the code related to the presentatio
 
 server.test.js - Applicatin for testing the main functions of applications 
 
-layouts handlers - loginmainmain  - Application for css layout 
+layouts handlers - loginmain and main  - Application for css layout 
 
-tomplates - customerDat, error404, homepage, login, searchrecord. Application for css layout and design
+templates - customerData, error404, homepage, login, searchrecord. Application for css layout and design
 
 yml - .github/workflow/<filaname>.yml - yml file for github workflow action for ci/cd pipeline and deployments
 
 
 **Team Contributions**
 
-Mazin Thajudeen: Worked on code, development featuer, database and workflow
+Mazin Thajudeen: Worked on code, development feature, database, and workflow
 
-Hamdan Mahroof: Worked on code, design, css development and workflow
+Hamdan Mahroof: Worked on code, design, CSS development and workflow
 
-Ekram: Worked on bug fix, code, database, testing and workflow
+Ekram: Worked on bug fixes, code, database, testing, and workflow
 
-MohamedElsabonabi: Worked on code, database, testing and workflow
+MohamedElsabonabi: Worked on code, database, testing, and workflow
 
 
 **Acknowledgement**
@@ -81,7 +81,7 @@ Figma Prototype - https://www.figma.com/file/0AuzNTD8F7qaRCmzL6bIcK/Untitled?typ
 
 Powerpoint Presentation - https://drive.google.com/drive/u/1/my-drive
 
-Project Documentatin -  https://docs.google.com/document/d/1dDutoSvffgDyqPVYZW4NwKvoaNJvLNqV/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true
+Project Documentation -  https://docs.google.com/document/d/1dDutoSvffgDyqPVYZW4NwKvoaNJvLNqV/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true
 
 Final Reporting - https://docs.google.com/document/d/1ZlAfRXJFntzXZ0YyyI39JebP8hv5l48R/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true 
 
