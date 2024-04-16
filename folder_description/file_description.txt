@@ -1,0 +1,88 @@
+persistence.js - In the given layer, the mongodb connection is setup as well as all the variables that will be used in the business and presentation layers
+function connectDatabase - The mongodb cluster is accessed from this function and connection is setup with the database
+funtion insertUser - A user is inserted into the users collection using this function
+funtion insertCustomer - A customer is inserted into the customers collection using this function
+funtion insertPointData - A pointData is inserted into the pointHistory collection using this function
+function getUserDetails - the entered username is used to retrieve the details of a user in the system using this function
+function getPointHistory -  This function retrieves a user's point history data based on their identifier (qid)
+function getCustomerDetails - This function retrieves customer details based on their identifier (qid).
+function addRecord - This function adds a record to waste disposal records based on date or updates a record if the date is already enetered
+function updatePoints - This function updates a customers total points based on records added/updated in the system
+function saveSession - This function saves session data for users including session key, expiry time and data for the session
+function getSessionData - This function retrieves session data based on the provided session key
+function deleteSession - This function deletes session data based on the provided session key
+
+business.js - in this layer the business logic of the system is implemented and intergrated with the persistence layer to be used in the presesntation layer
+function insertUser - intergrates insertUser function from the persistence layer
+function insertCustomer - intergrates insertCustomer function from the persistence layer
+function getCustomerDetails - This function retrieves customer details from the database based on the provided identifier (qid) and create a new customer record if it is not found
+function checkLogin - this funtcion validates the user login credentials by comparing user and hashed password with database credentials
+function validID - This function checks if the provided identifier (qid) is a valid format by verifying its length and specific country code patterns
+function addRecord - intergrates addRecord function from the persistence layer
+function insertPointData - intergrates insertPointData function from the persistence layer
+function getPointHistory - intergrates getPointHistory function from the persistence layer
+funtion getPoints - This function categorizes waste into points based on ctaegory name
+function updatePoints - intergrates updatePoints function from the persistence layer
+function startSession - This function generates a random, unique session ID and saves session data
+function getSessionData - intergrates getSessionData function from the persistence layer
+function deleteSessionData - intergrates deleteSessionData function from the persistence layer
+
+presentation.js - uses persistence layer functions and business layer business logic to interact with the server and display the webpage on the browser
+route app.get/ - Renders the homepage template using the main layout.
+route app.get/login - Renders the login page template, displays a message if provided.
+route app.get/logout - Deletes the session used by the current user and redirects to the login page
+route app.post/login-form - Handles user form submission, validates user login credentials and creates a session after a sucessful login.
+route app.get/search-record - Renders the search record page template, ensuring the user is logged in and handling cases where no session is found.
+route app.get/info - Renders the customer data page template, ensuring the user is logged in and validating the provided Qatari ID.
+function function404 - This function is used to render an error page with status code 404 if a route is not found
+function isEmptyArray - This function is used to return true if the array length of zero is true for given array
+function totalDayPoints - This fnction is used to calculate and return user daily points based on session data
+route app.put/api/:qid/info - Handles updating customer information, such as waste disposal records, and inserting point data into the database.
+route app.get/api/:qid/user - Retrieves customer details based on the provided Qatari ID.
+route app.get/api/:qid/user/point - Retrieves the point history of a user based on the provided Qatari ID.
+route app.patch/api/:qid/info - Handles updating the total points of a customer and inserting point redemption data into the database.
+
+main.handlebars - this is the html and css parts of the code related to main page
+CSS (style.css):
+Centering and Responsiveness: The CSS styles are used to make the webpage content centered both vertically and horizontally on the screen. This is achieved using flexbox properties such as display: flex, justify-content: center, and align-items: center.
+Background Color: Sets the background color of the webpage to a light blue color (#DAF4FF), providing a visually appealing background.
+Padding: Adds padding to the bottom of the content to create space between the content and the bottom of the viewport.
+HTML:
+Page Layout: The page features standard layout for the html part. The body is dynamically inserted to the webpage using {{{body}}}
+
+customerData.handlebars:
+Location: Located directly in the templates directory.
+Purpose: This file serves as a template for rendering the customer data page, which displays detailed information about a specific 
+customer, including their waste disposal records and points history.
+Usage: It defines the structure and content unique to the customer data page, such as data tables, record listings, and specific 
+styling tailored to presenting customer-related data. This template is dynamically populated with data retrieved from the server 
+and displayed to the user in a clear and organized manner.
+
+error404.handlebars:
+Location: This file is typically located in the templates directory, which is used for server-side rendering in web applications.
+Purpose: error404.handlebars is a Handlebars template file used to render the 404 error page when a requested resource is not 
+found on the server. It provides a user-friendly interface to inform the user that the requested page does not exist.
+Usage: When a user navigates to a URL that does not exist on the server, the server responds with this error page, providing 
+feedback to the user about the missing resource and preventing confusion.
+
+hompage.handlebars:
+Location: This file is typically located in the templates directory, which is used for server-side rendering in web applications.
+Purpose: homepage.handlebars is a Handlebars template file used to render the homepage of the website. It provides a simple 
+interface with a call-to-action button to encourage users to navigate to the login page.
+Usage: When a user visits the homepage of the website, they see this interface with a prominent button prompting them to navigate 
+to the login page. This encourages user engagement and helps direct them to the next step in the user journey.
+
+login.handlebars:
+Location: This file is typically located in the templates directory, which is used for server-side rendering in web applications.
+Purpose: login.handlebars is a Handlebars template file used to render the login page of the website. It provides a form for users 
+to enter their credentials (username and password) and submit them for authentication.
+Usage: When a user visits the login page of the website, they see this form, allowing them to input their username and password 
+to log in. If there are any authentication errors, they are displayed at the top of the form to provide feedback to the user.
+
+searchRecord.handlebars:
+Location: This file is typically located in the templates directory, which is used for server-side rendering in web applications.
+Purpose: searchRecord.handlebars is a Handlebars template file used to render the search record page of the website. It provides a 
+form for users to enter their Qatar ID and submit it to retrieve their information.
+Usage: When a user visits the search record page of the website, they see this form, allowing them to input their Qatar ID and 
+retrieve their information. If there are any errors, such as an invalid Qatar ID or server-side issues, they are displayed at the 
+top of the form to provide feedback to the user.
