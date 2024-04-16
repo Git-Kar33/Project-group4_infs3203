@@ -65,7 +65,13 @@ Community Engagement: Through our rewards system, we aim to foster a sense of co
 **Resolution**: Changing the operation sign to subtraction
 
 
+**Team Contributions**
 
+Mazin Thajudeen: Worked on feature development, bugs and workflow
+
+: Description of what this team member worked on (e.g., database design, API integration, testing).
+
+Team Member 3: Description of what this team member worked on (e.g., user interface design, performance optimization, code review).
 
 
 **Acknowledgement**
