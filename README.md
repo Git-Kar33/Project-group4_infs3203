@@ -45,7 +45,7 @@ Community Engagement: Through our rewards system, we aim to foster a sense of co
 
 **Team Contributions**
 
-Mazin Thajudeen: Worked on feature development, bugs, code, database and workflow
+Mazin Thajudeen: Worked on code, development featuer, database and workflow
 
 Hamdan Mahroof: Worked on code, design, css development and workflow
 
