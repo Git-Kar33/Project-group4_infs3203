@@ -1,0 +1,35 @@
+name: CI / CD Development-assets
+
+on:
+  push:
+    paths-ignore: 
+      - .github/workflows/dev.yml
+    branches:
+       - development-assets
+  pull_request:
+    branches:
+       - development-assets
+
+jobs:
+  test:
+    name: Run Server Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Remove .github/workflows directory
+      run: |
+        rm -rf .github/workflows
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm run test
