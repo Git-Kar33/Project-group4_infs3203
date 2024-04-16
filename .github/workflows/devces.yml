@@ -1,9 +1,14 @@
-name: CI / CD Testing
+name: CI / CD Development-css
 
 on:
   push:
+    paths-ignore: 
+      - .github/workflows/devces.yml
     branches:
-      - testing
+       - development-css
+  pull_request:
+    branches:
+       - development-css
 
 jobs:
   test:
@@ -13,6 +18,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Remove .github/workflows directory
+      run: |
+        rm -rf .github/workflows
       
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -24,10 +33,3 @@ jobs:
 
     - name: Run tests
       run: npm run test
-
-    - name: Push changes to testing1 branch
-      uses: ad-m/github-push-action@master
-      with:
-        branch: development
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
