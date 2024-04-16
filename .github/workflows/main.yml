@@ -23,6 +23,10 @@ jobs:
       - name: Build Docker image
         run: docker build -t git-kar33/project-group4_infs3203 .
 
+      - name: Build docker tab
+        run: docker tag Git-Kar33/project-group4_infs3203 git-kar33/project-group4_infs3203:latest
+
+
       - name: Publish image to Docker Hub
         run: docker push git-kar33/project-group4_infs3203:latest
 
