@@ -1,50 +1,40 @@
-name: CI / CD Main
+name: CI/CD Maintest
 
 on:
   push:
-    paths-ignore: 
+    paths-ignore:
       - .github/workflows/main.yml
     branches:
-       - main      
+      - maintest
   pull_request:
     branches:
-       - main
-  
+      - maintest
 
 jobs:
-  test:
-    name: Run Server Tests
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Remove .github/workflows directory
-      run: |
-        rm -rf .github/workflows
-  
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: npm install
+      - name: Login to Docker Hub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
 
-    - name: Run tests
-      run: npm run test
+      - name: Build Docker image
+        run: docker build -t Git-Kar33/Project-group4_infs3203 .
 
-    - name: Generate Deployment Package
-      run: zip -r Project-group4_infs3203-build.zip .
+      - name: Publish image to Docker Hub
+        run: docker push Git-Kar33/Project-group4_infs3203:latest
 
-    - name: Deploy to EB
-      uses: einaregilsson/beanstalk-deploy@v21
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: back-serv
-        environment_name: back-serv-env
-        version_label: ${{github.sha}}
-        region: ap-south-1
-        deployment_package: Project-group4_infs3203-build.zip
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull image from Docker Hub
+        run: docker pull Git-Kar33/Project-group4_infs3203:latest
+
+      - name: Delete old container
+        run: docker rm -f nodejs-app-container
+
+      - name: Run Docker container
+        run: docker run -d -p 5000:5000 --name nodejs-app-container Git-Kar33/Project-group4_infs3203
