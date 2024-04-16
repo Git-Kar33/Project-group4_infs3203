@@ -16,8 +16,8 @@ app.use("/static",express.static(__dirname+"/static"));
 
 app.engine('hbs', expressHbs({ 
     extname: '.hbs', 
-    defaultLayout: 'main-layout', 
-    layoutsDir: 'views/layouts/' 
+    defaultLayout: 'loginMain', 
+    layoutsDir: 'templates/layouts/' 
 }));
 
 function function404(req, res) {
