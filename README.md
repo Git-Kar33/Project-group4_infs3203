@@ -43,28 +43,6 @@ Community Engagement: Through our rewards system, we aim to foster a sense of co
 
 
 
-## 
-
-### Bug Identification:
-#### Bug1: The square_root Operation in the Calculator Class Lacks a Condition for Handling Negative Numbers. 
-**Resolution**: Changing the negative operational sign to plus operation sign 
-
-#### Bug2: Enhancement to code for "square_root" operation
-**Resolution**: Adding in if loop to identify related opreation function 
-
-#### Bug3: The modulus operation in the Calculator class cannot have the divisor set to zero
-**Resolution**: Adding in if loop to make sure it is not zero
-
-#### Bug4: The power function in the calculator is producing an error
-**Resolution**: Changing the operation sign to two asterisk to calculate as power
-
-#### Bug5: The subtraction operation in the Calculator class is performing addition
-**Resolution**: Changing the operation sign to subtraction
-
-#### Bug6: The addition operation in the Calculator class is performing subtraction
-**Resolution**: Changing the operation sign to subtraction
-
-
 **Team Contributions**
 
 Mazin Thajudeen: Worked on feature development, bugs, code, database and workflow
