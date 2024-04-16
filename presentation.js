@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const business = require('./business.js')
+const { engine: expressHbs } = require('express-handlebars');
 
 let app = express()
 const handlebars = require('express-handlebars')
@@ -12,6 +13,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 app.use(cookieParser())
 app.use("/static",express.static(__dirname+"/static"));
+
+app.engine('hbs', expressHbs({ 
+    extname: '.hbs', 
+    defaultLayout: 'main-layout', 
+    layoutsDir: 'views/layouts/' 
+}));
 
 function function404(req, res) {
     res.status(404).render("error404", {layout:undefined})
