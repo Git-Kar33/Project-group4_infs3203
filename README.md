@@ -78,4 +78,4 @@ Project Documentatin -  https://docs.google.com/document/d/1dDutoSvffgDyqPVYZW4N
 
 Final Reporting - https://docs.google.com/document/d/1ZlAfRXJFntzXZ0YyyI39JebP8hv5l48R/edit?usp=sharing&ouid=103878263396277251455&rtpof=true&sd=true 
 
-Refer Project explanation - 
+Refer Project explanation and steps - https://github.com/Git-Kar33/Project-group4_infs3203/tree/main/folder_description
